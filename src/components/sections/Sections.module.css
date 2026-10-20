@@ -1,0 +1,412 @@
+.about {
+  padding: 100px var(--gutter);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 7%;
+}
+.aboutLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+}
+.smallStar {
+  font-size: 180px;
+  color: var(--accent);
+  line-height: 1;
+  font-weight: 400;
+  display: block;
+  align-self: flex-start;
+}
+.aboutContent h2 {
+  font-size: clamp(36px, 4.4vw, 66px);
+  letter-spacing: -0.055em;
+  line-height: 1.12;
+}
+.aboutCopy {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 35px;
+}
+.aboutCopy p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--muted);
+}
+.aboutContent > .text-link {
+  font-size: 12px;
+  margin-top: 25px;
+}
+.approach {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  border-top: 1px solid var(--rule);
+  margin-top: 70px;
+  padding-top: 25px;
+}
+.approach > div > span {
+  font-size: 10px;
+  color: var(--accent);
+}
+.approach h3 {
+  font-size: 15px;
+  letter-spacing: -0.025em;
+  margin-top: 15px;
+}
+.approach p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.8;
+}
+.withPortrait .aboutLabel {
+  gap: 35px;
+}
+.withPortrait .smallStar {
+  display: none;
+}
+.withPortrait .aboutLabel figure {
+  max-width: 390px;
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 20px;
+}
+.experiments {
+  padding: 100px var(--gutter);
+  border-top: 1px solid var(--rule);
+}
+.experimentsHeading h2 {
+  font-size: clamp(43px, 5.3vw, 80px);
+  letter-spacing: -0.06em;
+  line-height: 1.1;
+  margin-top: 22px;
+}
+.experimentsHeading > p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 18px;
+}
+.experimentGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+  margin-top: 55px;
+}
+.typeExperiment,
+.auditExperiment {
+  padding: 30px;
+  border: 1px solid var(--rule);
+  background: #191919;
+}
+.typeExperiment {
+  background: #e8e4db;
+  color: #1d1d1a;
+}
+.experimentMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+}
+.pulseType {
+  font-size: clamp(72px, 10vw, 150px);
+  letter-spacing: -0.09em;
+  line-height: 1;
+  padding: 74px 0 65px;
+  text-align: center;
+  font-variation-settings: normal;
+}
+.pulseType span {
+  color: #dc472d;
+}
+.rangeLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+}
+.typeExperiment input {
+  width: 100%;
+  accent-color: #b33823;
+  margin: 18px 0 0;
+  min-height: 25px;
+  cursor: ew-resize;
+}
+.experimentFoot {
+  margin-top: 38px;
+  border-top: 1px solid #1d1d1a30;
+  padding-top: 20px;
+}
+.experimentFoot h3 {
+  font-size: 19px;
+  letter-spacing: -0.04em;
+}
+.experimentFoot p {
+  font-size: 11px;
+  line-height: 1.8;
+  margin-top: 10px;
+  opacity: 0.75;
+}
+.auditExperiment {
+  display: flex;
+  flex-direction: column;
+}
+.auditExperiment select {
+  width: 100%;
+  margin-top: 30px;
+  min-height: 44px;
+  background: #222;
+  border: 1px solid var(--rule);
+  color: var(--foreground);
+  padding: 8px 12px;
+  font-size: 12px;
+}
+.auditFlow {
+  padding-top: 22px;
+  flex: 1;
+}
+.auditFlow > div {
+  border-left: 1px solid #ff654650;
+  padding-left: 15px;
+  margin-bottom: 20px;
+}
+.auditFlow > div > span {
+  display: block;
+  font-size: 8px;
+  color: var(--accent-soft);
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+.auditFlow code {
+  font-family: monospace;
+  font-size: 11px;
+  white-space: pre-wrap;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.auditFlow p {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.auditExperiment .experimentFoot {
+  margin-top: 8px;
+  border-color: var(--rule);
+}
+.contact {
+  background: var(--accent);
+  color: var(--background);
+  padding: 50px var(--gutter) 48px;
+}
+.contactTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.contactTop > .eyebrow {
+  font-size: 9px;
+}
+.contactTitle {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: center;
+  margin: 75px 0 55px;
+}
+.contactTitle:hover {
+  color: var(--background);
+}
+.contactTitle h2 {
+  font-size: clamp(50px, 7.2vw, 110px);
+  letter-spacing: -0.065em;
+  line-height: 1.02;
+}
+.contactTitle > span {
+  border: 1px solid #12121270;
+  border-radius: 50%;
+  width: 110px;
+  height: 110px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition:
+    background 0.25s,
+    transform 0.25s;
+}
+.contactTitle svg {
+  width: 48px;
+  height: 48px;
+}
+.contactTitle:hover > span {
+  background: var(--foreground);
+  transform: rotate(8deg);
+}
+.contactBottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid #12121240;
+  padding-top: 24px;
+}
+.contactBottom p {
+  font-size: 12px;
+}
+.contactBottom > a {
+  font-size: 14px;
+  border-color: #12121270;
+  gap: 40px;
+}
+.contactBottom > a:hover {
+  color: var(--background);
+  border-color: var(--background);
+}
+@media (max-width: 900px) {
+  .about {
+    grid-template-columns: 0.5fr 1.5fr;
+  }
+  .smallStar {
+    font-size: 120px;
+  }
+  .aboutCopy {
+    grid-template-columns: 1fr;
+  }
+  .experimentGrid {
+    gap: 18px;
+  }
+  .typeExperiment,
+  .auditExperiment {
+    padding: 22px;
+  }
+  .experimentMeta {
+    font-size: 7px;
+  }
+  .contactTitle > span {
+    width: 75px;
+    height: 75px;
+  }
+  .contactTitle svg {
+    width: 35px;
+    height: 35px;
+  }
+}
+@media (max-width: 600px) {
+  .about {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding-top: 65px;
+    padding-bottom: 65px;
+  }
+  .aboutLabel {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+  }
+  .smallStar {
+    font-size: 65px;
+  }
+  .aboutContent h2 {
+    font-size: 39px;
+  }
+  .aboutCopy {
+    gap: 18px;
+    margin-top: 25px;
+  }
+  .approach {
+    gap: 15px;
+    margin-top: 40px;
+  }
+  .approach h3 {
+    font-size: 13px;
+  }
+  .approach p {
+    font-size: 10px;
+  }
+  .withPortrait .aboutLabel {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .experiments {
+    padding-top: 65px;
+    padding-bottom: 65px;
+  }
+  .experimentGrid {
+    grid-template-columns: 1fr;
+    margin-top: 35px;
+    gap: 24px;
+  }
+  .typeExperiment,
+  .auditExperiment {
+    padding: 24px;
+  }
+  .pulseType {
+    font-size: 105px;
+    padding: 55px 0;
+  }
+  .experimentMeta {
+    font-size: 7px;
+  }
+  .auditExperiment .experimentFoot {
+    margin-top: 20px;
+  }
+  .contact {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .contactTop > .eyebrow {
+    font-size: 7px;
+  }
+  .contactTitle {
+    margin: 45px 0 35px;
+    gap: 10px;
+  }
+  .contactTitle h2 {
+    font-size: clamp(38px, 9vw, 56px);
+  }
+  .contactTitle > span {
+    width: 45px;
+    height: 45px;
+  }
+  .contactTitle svg {
+    width: 22px;
+    height: 22px;
+  }
+  .contactBottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .contactBottom > a {
+    font-size: 12px;
+    gap: 25px;
+  }
+}
+
+.aboutCopy p {
+  font-size: 15px;
+}
+.approach p {
+  font-size: 12px;
+}
+.auditFlow p {
+  font-size: 13px;
+}
+.auditExperiment select {
+  font-size: 14px;
+}
+.experimentFoot p {
+  font-size: 12px;
+}
+@media (max-width: 600px) {
+  .aboutCopy p {
+    font-size: 14px;
+  }
+  .approach p {
+    font-size: 11px;
+  }
+  .auditFlow p {
+    font-size: 13px;
+  }
+}

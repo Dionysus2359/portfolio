@@ -1,0 +1,197 @@
+.page {
+  padding: 75px var(--gutter) 100px;
+}
+.intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8%;
+  align-items: end;
+  margin-bottom: 80px;
+}
+.intro h1 {
+  font-size: clamp(60px, 7vw, 105px);
+  line-height: 0.98;
+  letter-spacing: -0.065em;
+  margin-top: 28px;
+}
+.intro > div > p {
+  margin-top: 28px;
+  max-width: 460px;
+  font-size: 15px;
+  color: var(--muted);
+}
+.contactInfo {
+  padding-bottom: 5px;
+}
+.contactInfo p {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.contactInfo > a {
+  font-size: clamp(15px, 1.7vw, 24px);
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+}
+.contactInfo > div {
+  display: flex;
+  gap: 25px;
+  margin-top: 20px;
+}
+.contactInfo > div > a {
+  font-size: 12px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.contactInfo svg {
+  width: 14px;
+  height: 14px;
+}
+.form {
+  max-width: 1050px;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+}
+.form label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+}
+.form label > span {
+  color: var(--accent);
+  margin-left: 4px;
+}
+.form .optional {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 400;
+}
+.form input,
+.form textarea,
+.form select {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  padding: 15px 0;
+  color: var(--foreground);
+  font-size: 14px;
+  border-radius: 0;
+  resize: vertical;
+}
+.form input::placeholder,
+.form textarea::placeholder {
+  color: #92918c;
+  font-size: 13px;
+}
+.form select {
+  min-height: 57px;
+}
+.form option {
+  background: var(--background);
+}
+.formAction {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding-top: 12px;
+}
+.formAction > button {
+  border: none;
+}
+.formAction > p {
+  font-size: 10px;
+  color: var(--muted);
+}
+.draft {
+  border: 1px solid var(--rule);
+  padding: 25px;
+  background: var(--surface);
+}
+.draft h2 {
+  font-size: 25px;
+  letter-spacing: -0.04em;
+}
+.draft p {
+  font-size: 12px;
+  color: var(--muted);
+  max-width: 650px;
+  margin: 12px 0 25px;
+}
+.draft > div {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.draft button {
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--muted);
+  padding: 12px 0;
+  font-size: 12px;
+}
+.draft details {
+  margin-top: 25px;
+  font-size: 12px;
+}
+.draft summary {
+  cursor: pointer;
+  min-height: 44px;
+  display: list-item;
+  padding-top: 10px;
+}
+.draft pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+@media (max-width: 700px) {
+  .page {
+    padding-top: 40px;
+    padding-bottom: 65px;
+  }
+  .intro {
+    grid-template-columns: 1fr;
+    gap: 45px;
+    margin-bottom: 50px;
+  }
+  .intro h1 {
+    font-size: 65px;
+  }
+  .intro > div > p {
+    font-size: 13px;
+  }
+  .form {
+    gap: 30px;
+  }
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .formAction {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 17px;
+  }
+  .formAction > button {
+    width: 100%;
+  }
+  .draft {
+    padding: 20px;
+  }
+  .draft .button-link {
+    font-size: 12px;
+  }
+}

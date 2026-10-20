@@ -1,0 +1,591 @@
+.stage {
+  position: relative;
+}
+.sticky {
+  position: relative;
+  overflow: clip;
+}
+.hero {
+  min-height: calc(100svh - 104px);
+  position: relative;
+  z-index: 2;
+  padding: 43px var(--gutter) 0;
+  display: flex;
+  flex-direction: column;
+}
+.heroMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  font-size: 10px;
+}
+.availability {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  color: var(--muted);
+}
+.availability i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px #ff654650;
+}
+.headline {
+  margin: 48px 0 22px;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+.headline h1 {
+  font-size: clamp(88px, 10.1vw, 156px);
+  line-height: 0.91;
+  letter-spacing: -0.075em;
+  font-weight: 500;
+}
+.italicLine {
+  display: inline-block;
+  margin: 0 0 0 15.5vw;
+  line-height: 0.91;
+}
+.period {
+  color: var(--accent);
+}
+.heroIntro {
+  position: absolute;
+  left: 40%;
+  bottom: 121px;
+  z-index: 3;
+}
+.heroIntro p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.heroIntro a {
+  font-size: 12px;
+  margin-top: 14px;
+  gap: 37px;
+}
+.objectLabel {
+  position: absolute;
+  left: 70%;
+  top: 73%;
+  font-size: 9px;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.objectLabel > .eyebrow {
+  font-size: 8px;
+  color: var(--foreground);
+}
+.heroBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  font-size: 10px;
+  padding: 24px 0;
+  margin-top: auto;
+  border-top: 1px solid var(--rule);
+}
+.heroNumber {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.scrollHint {
+  display: flex;
+  align-items: center;
+  gap: 45px;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  min-height: 44px;
+}
+.scrollHint > span:last-child {
+  font-size: 28px;
+  line-height: 1;
+}
+.poster {
+  position: absolute;
+  z-index: 0;
+  top: 9%;
+  left: 48%;
+  width: 55%;
+  height: 78%;
+  pointer-events: none;
+}
+.poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.canvasMount {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.galleryTitle {
+  display: none;
+}
+.projectLinks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+  padding: 75px var(--gutter);
+  position: relative;
+  z-index: 3;
+  border-bottom: 1px solid var(--rule);
+}
+.projectLink {
+  display: block;
+  min-width: 0;
+  transition: color 0.2s;
+}
+.cardImage {
+  overflow: hidden;
+  background: #222;
+  aspect-ratio: 16/10;
+}
+.cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.4s;
+}
+.projectLink:hover .cardImage img {
+  transform: scale(1.04);
+}
+.cardLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 16px;
+}
+.cardLabel small {
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  display: block;
+}
+.cardLabel strong {
+  font-size: 22px;
+  letter-spacing: -0.045em;
+  font-weight: 500;
+  display: block;
+  margin-top: 5px;
+}
+.cardLabel svg {
+  width: 20px;
+}
+.stageProgress {
+  display: none;
+}
+.effectsControl {
+  position: absolute;
+  z-index: 7;
+  right: var(--gutter);
+  bottom: 80px;
+  padding: 7px 12px;
+  border: 1px solid var(--rule);
+  background: #121212bc;
+  backdrop-filter: blur(5px);
+  font-size: 9px;
+  letter-spacing: 0.02em;
+  min-height: 38px;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.effectsControl > span {
+  font-size: 14px;
+  color: var(--accent);
+}
+.heroPortrait {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  position: absolute;
+  left: var(--gutter);
+  bottom: 130px;
+}
+.heroPortrait img {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+}
+.stage[data-enhanced="true"] {
+  height: 280svh;
+}
+.stage[data-enhanced="true"] .sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+}
+.stage[data-enhanced="true"] .hero {
+  height: 100svh;
+  min-height: 0;
+  padding-top: 40px;
+}
+.stage[data-enhanced="true"] .heroBottom {
+  margin-top: auto;
+}
+.stage[data-enhanced="true"] .headline {
+  margin-top: 50px;
+}
+.stage[data-enhanced="true"] .poster {
+  display: none;
+}
+.stage[data-enhanced="true"] .galleryTitle {
+  display: block;
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  top: 48px;
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.galleryTitle h2 {
+  font-size: clamp(48px, 5.2vw, 78px);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  margin-top: 18px;
+}
+.galleryPrompt {
+  position: absolute;
+  right: 0;
+  bottom: 6px;
+  font-size: 10px;
+  color: var(--muted);
+}
+.stage[data-enhanced="true"] .projectLinks {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  display: block;
+  border: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.stage[data-enhanced="true"] .projectLink {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: auto;
+  border: 1px solid #ffffff22;
+  transition: border 0.25s;
+}
+.stage[data-enhanced="true"] .projectLink:hover,
+.stage[data-enhanced="true"] .projectLink:focus-visible {
+  border-color: var(--accent);
+}
+.stage[data-enhanced="true"] .cardImage {
+  display: none;
+}
+.stage[data-enhanced="true"] .cardLabel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding-top: 2px;
+}
+.stage[data-enhanced="true"] .stageProgress {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  bottom: 25px;
+  left: var(--gutter);
+  right: var(--gutter);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  z-index: 4;
+}
+.stageProgress > div {
+  height: 1px;
+  background: var(--rule);
+  flex: 1;
+}
+.stageProgress i {
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+.handoff {
+  display: none;
+}
+.stage[data-enhanced="true"] .handoff {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: var(--gutter);
+  right: var(--gutter);
+  z-index: 5;
+  opacity: 0;
+  visibility: hidden;
+  padding-bottom: 10px;
+}
+.handoffHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+  margin-bottom: 24px;
+}
+.handoffHeading h2 {
+  font-size: clamp(30px, 3.2vw, 48px);
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+  margin-top: 12px;
+}
+.handoffHeading h2 span {
+  font-size: 0.8em;
+}
+.handoffHeading > a {
+  font-size: 11px;
+  flex-shrink: 0;
+}
+@media (min-width: 1600px) {
+  .hero {
+    min-height: 900px;
+  }
+  .heroIntro {
+    bottom: 150px;
+  }
+}
+@media (max-width: 1100px) and (min-width: 701px) {
+  .headline {
+    margin-top: 70px;
+  }
+  .headline h1 {
+    font-size: 11.5vw;
+  }
+  .heroIntro {
+    left: 48%;
+    bottom: 120px;
+  }
+  .objectLabel {
+    left: 73%;
+    top: 65%;
+  }
+  .heroNumber {
+    display: none;
+  }
+  .heroMeta > .eyebrow {
+    font-size: 8px;
+  }
+  .availability {
+    font-size: 9px;
+  }
+}
+@media (max-width: 700px) {
+  .hero {
+    min-height: calc(100svh - 82px);
+    padding-top: 27px;
+  }
+  .heroMeta > .eyebrow {
+    font-size: 8px;
+    max-width: 140px;
+  }
+  .availability {
+    font-size: 8px;
+    gap: 5px;
+    max-width: 127px;
+  }
+  .availability i {
+    flex-shrink: 0;
+  }
+  .headline {
+    margin-top: 64px;
+    margin-bottom: 25px;
+  }
+  .headline h1 {
+    font-size: clamp(68px, 17vw, 116px);
+    line-height: 0.95;
+    letter-spacing: -0.07em;
+  }
+  .italicLine {
+    margin-left: 13vw;
+  }
+  .heroIntro {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    max-width: 240px;
+    margin: 0 0 30px;
+    z-index: 2;
+  }
+  .heroIntro p {
+    font-size: 12px;
+  }
+  .heroIntro a {
+    font-size: 11px;
+    gap: 30px;
+    margin-top: 10px;
+  }
+  .poster {
+    top: 23%;
+    left: 46%;
+    width: 67%;
+    height: 50%;
+    opacity: 0.85;
+  }
+  .objectLabel {
+    display: none;
+  }
+  .heroBottom {
+    font-size: 8px;
+    padding: 20px 0 16px;
+    gap: 15px;
+  }
+  .heroNumber {
+    display: none;
+  }
+  .scrollHint {
+    font-size: 7px;
+    gap: 15px;
+  }
+  .scrollHint > span:last-child {
+    font-size: 24px;
+  }
+  .projectLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 40px var(--gutter);
+  }
+  .cardImage {
+    aspect-ratio: 16/10;
+  }
+  .cardLabel strong {
+    font-size: 26px;
+  }
+  .effectsControl {
+    bottom: 25px;
+  }
+  .heroPortrait {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    margin-bottom: 20px;
+  }
+  .desktopBreak {
+    display: none;
+  }
+}
+@media (max-width: 380px) {
+  .hero {
+    min-height: 700px;
+  }
+  .headline {
+    margin-top: 55px;
+  }
+  .headline h1 {
+    font-size: 17vw;
+  }
+  .heroIntro {
+    max-width: 195px;
+  }
+  .poster {
+    top: 26%;
+    height: 42%;
+  }
+  .scrollHint {
+    gap: 8px;
+  }
+}
+
+.heroIntro p {
+  font-size: 15px;
+}
+.heroIntro a {
+  font-size: 13px;
+}
+.availability {
+  font-size: 11px;
+}
+.heroBottom {
+  font-size: 11px;
+}
+.cardLabel small {
+  font-size: 10px;
+}
+.objectLabel {
+  color: #c3bfb7;
+}
+.objectLabel > .eyebrow {
+  color: #121212;
+}
+@media (max-width: 700px) {
+  .heroIntro p {
+    font-size: 14px;
+  }
+  .heroIntro a {
+    font-size: 12px;
+  }
+  .availability {
+    font-size: 9px;
+  }
+  .heroBottom {
+    font-size: 9px;
+  }
+  .cardLabel small {
+    font-size: 9px;
+  }
+}
+
+.poster {
+  top: 65px;
+  height: 620px;
+}
+.objectLabel {
+  background: #121212e6;
+  border-left: 1px solid var(--accent);
+  padding: 8px 12px;
+  color: var(--muted);
+}
+.objectLabel > span:first-child {
+  color: var(--foreground);
+}
+@media (max-width: 700px) {
+  .poster {
+    top: 170px;
+    height: 330px;
+    left: 50%;
+    width: 65%;
+    opacity: 0.72;
+  }
+  .hero {
+    min-height: calc(100svh - 82px);
+  }
+}
+@media (max-width: 380px) {
+  .poster {
+    top: 165px;
+    height: 300px;
+  }
+}
+
+@media (min-width: 701px) {
+  .heroIntro {
+    left: var(--gutter);
+  }
+}

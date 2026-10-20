@@ -1,0 +1,10 @@
+plans_docs/
+node_modules/
+.next/
+out/
+.sites-runtime/
+.env*
+!.env.example
+*.tsbuildinfo
+*.tar.gz
+.DS_Store
