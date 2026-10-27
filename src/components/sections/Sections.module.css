@@ -410,3 +410,61 @@
     font-size: 13px;
   }
 }
+
+/* The material and colour progression continues beyond the opening poster. */
+.about { padding-top: 110px; padding-bottom: 110px; background: var(--ivory); color: var(--deep); --muted: #4b6558; --rule: #082a2535; --accent-soft: #a72b22; grid-template-columns: .85fr 1.15fr; gap: 8%; }
+.aboutLabel { gap: 40px; }
+.aboutPoster { position: relative; padding: 28px; min-height: 425px; background: var(--petrol); color: var(--ivory); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+.aboutPoster::before { content: ''; position: absolute; width: 1px; height: 160%; right: 30%; top: -30%; background: var(--scarlet); box-shadow: 0 0 70px 14px #eb302b38; transform: rotate(26deg); }
+.aboutPoster > span { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; position: relative; }
+.aboutPoster p { font-family: Bodoni Moda, Georgia, serif; font-size: clamp(60px, 6.5vw, 115px); font-weight: 500; line-height: .9; letter-spacing: -.06em; color: #ff5149; position: relative; padding: 45px 0; }
+.aboutPoster > span:last-child { color: var(--sage); }
+.aboutContent h2 { font-family: Bodoni Moda, Georgia, serif; font-weight: 400; font-size: clamp(38px, 4vw, 68px); line-height: 1.1; letter-spacing: -.055em; }
+.aboutContent h2 :global(.serif) { color: #a12b23; }
+.aboutCopy { gap: 25px; }
+.approach { margin-top: 48px; gap: 22px; }
+.approach > div > span { color: #a12b23; }
+.withPortrait .aboutPoster { display: none; }
+.withPortrait .aboutLabel figure { margin: 0; }
+.experiments { background: var(--soft-sage); color: var(--deep); --muted: #3f594d; --rule: #082a2535; --accent-soft: #a72b22; }
+.experimentsHeading h2 { font-family: Bodoni Moda, Georgia, serif; font-weight: 400; letter-spacing: -.055em; font-size: clamp(50px, 6.5vw, 100px); }
+.typeExperiment { background: var(--ivory); border: 1px solid #082a2535; }
+.pulseType { font-family: Bodoni Moda, Georgia, serif; font-size: clamp(85px, 11vw, 160px); letter-spacing: -.07em; padding: 60px 0; }
+.pulseType span { color: #aa2b24; }
+.typeExperiment input { accent-color: #a12b23; }
+.auditExperiment { background: var(--petrol); color: var(--ivory); --muted: #b7c7bc; --rule: #f2edde35; --accent-soft: #a4bfb0; }
+.auditExperiment select { background: var(--deep); color: var(--ivory); }
+.auditFlow > div { border-left-color: var(--sage); }
+.auditFlow p, .auditFlow code { color: #cbd8ce; }
+.contact { position: relative; isolation: isolate; background: var(--petrol); color: var(--ivory); padding-top: 55px; padding-bottom: 45px; overflow: hidden; }
+.contact::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(112deg, transparent 60%, #a4bfb013 60.1%, transparent 77%), linear-gradient(112deg, transparent 77%, #eb302b55 77.2%, #eb302b00 85%), radial-gradient(ellipse at 90% 100%, #eb302b25, transparent 50%); }
+.contactTitle { margin-top: 65px; margin-bottom: 55px; }
+.contactTitle h2 { font-family: Bodoni Moda, Georgia, serif; font-weight: 500; font-size: clamp(52px, 7.1vw, 125px); letter-spacing: -.055em; line-height: 1; color: #ff5149; }
+.contactTitle:hover { color: var(--ivory); }
+.contactTitle > span { border-color: #f2edde70; }
+.contactTitle:hover > span { color: var(--deep); }
+.contactBottom { border-color: var(--rule); }
+.contactBottom > a { border-color: #f2edde70; }
+.contactBottom > a:hover { color: var(--ivory); border-color: var(--ivory); }
+@media (max-width: 1000px) { .aboutCopy { grid-template-columns: 1fr; } .aboutPoster { min-height: 390px; } }
+@media (max-width: 600px) {
+ .about { grid-template-columns: 1fr; padding-top: 65px; padding-bottom: 65px; }
+ .aboutLabel { flex-direction: column; align-items: stretch; gap: 25px; }
+ .aboutPoster { min-height: 340px; }
+ .aboutPoster p { font-size: clamp(50px, 15vw, 78px); }
+ .aboutContent h2 { font-size: clamp(36px, 9vw, 50px); }
+ .approach { grid-template-columns: 1fr; margin-top: 38px; gap: 24px; }
+ .approach > div { display: grid; grid-template-columns: 25px 1fr; column-gap: 15px; }
+ .approach h3 { margin: 0; font-size: 15px; }
+ .approach p { grid-column: 2; margin-top: 4px; font-size: 13px; }
+ .approach > div > span { padding-top: 3px; }
+ .experimentsHeading h2 { font-size: 50px; }
+ .contact { padding-top: 35px; padding-bottom: 30px; }
+ .contactTop :global(.eyebrow) { font-size: 8px; }
+ .contactTitle { margin: 45px 0 35px; }
+ .contactTitle h2 { font-size: clamp(36px, 9.5vw, 59px); }
+ .contactTitle > span { width: 40px; height: 40px; }
+ .contactBottom > a { overflow-wrap: anywhere; font-size: 12px; }
+}
+
+.about > *, .experimentGrid > * { min-width: 0; }

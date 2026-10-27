@@ -195,3 +195,11 @@
     font-size: 12px;
   }
 }
+.page { background: radial-gradient(ellipse at 100% 0, #234b3d 0, transparent 55%); }
+.intro h1 { font-family: Bodoni Moda, Georgia, serif; font-weight: 400; letter-spacing: -.055em; color: #ff5149; }
+.intro :global(.serif) { color: var(--ivory); }
+.form { border-top: 1px solid var(--rule); padding-top: 40px; }
+.form input::placeholder, .form textarea::placeholder { color: #a7b9ad; }
+.form label > span { color: var(--accent-soft); }
+.formAction > p { font-size: 12px; }
+.draft h2 { font-family: Bodoni Moda, Georgia, serif; font-size: 36px; font-weight: 400; }

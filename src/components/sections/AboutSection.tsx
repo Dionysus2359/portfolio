@@ -14,9 +14,13 @@ export function AboutSection() {
         <span className="eyebrow" data-reveal>
           A little about the person
         </span>
-        <span className={styles.smallStar} aria-hidden="true" data-orbit>
-          ✳
-        </span>
+        {!profile.portrait && (
+          <div className={styles.aboutPoster} aria-hidden="true">
+            <span>Design × code × curiosity</span>
+            <p>Ideas.<br />Into<br />interfaces.</p>
+            <span>Om Tiwari / India</span>
+          </div>
+        )}
         {profile.portrait && <Photo photo={profile.portrait} portrait />}
       </div>
       <div className={styles.aboutContent}>

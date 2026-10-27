@@ -105,7 +105,7 @@ export const projects: PortfolioProject[] = [
       width: 390,
       height: 844,
     },
-    accent: "#d4f66a",
+    accent: "#a4bfb0",
     problem:
       "A festival platform has to hold up as a working product. My work started with an existing website and focused on its design, architecture and continued development.",
     decisions: [
@@ -151,7 +151,7 @@ export const projects: PortfolioProject[] = [
       height: 900,
       kind: "process-diagram",
     },
-    accent: "#ff866b",
+    accent: "#a4bfb0",
     problem:
       "A list of warnings is only useful when someone can understand the evidence behind it and decide what to fix. This team project connects a bounded website acquisition to structured findings and recommendations.",
     decisions: [

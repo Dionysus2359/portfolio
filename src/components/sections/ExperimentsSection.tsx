@@ -31,7 +31,7 @@ const auditExamples = [
 ];
 
 export function ExperimentsSection() {
-  const [weight, setWeight] = useState(500);
+  const [weight, setWeight] = useState(600);
   const [sample, setSample] = useState(0);
   const id = useId();
   return (
@@ -54,7 +54,7 @@ export function ExperimentsSection() {
             <span>INTERACTIVE STUDY ↙</span>
           </div>
           <div className={styles.pulseType} style={{ fontWeight: weight }}>
-            pulse<span>.</span>
+            feel<span>.</span>
           </div>
           <div className={styles.rangeLabel}>
             <label htmlFor={`${id}-weight`}>Find your weight.</label>
@@ -63,8 +63,8 @@ export function ExperimentsSection() {
           <input
             id={`${id}-weight`}
             type="range"
-            min="300"
-            max="700"
+            min="400"
+            max="900"
             step="1"
             value={weight}
             onChange={(e) => setWeight(Number(e.target.value))}

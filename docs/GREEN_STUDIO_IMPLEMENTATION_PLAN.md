@@ -1,11 +1,13 @@
 # Om Tiwari — Green Living Poster implementation plan
 
 **Decision date:** 27 October 2026  
-**Status:** Concept and green art direction selected; implementation has not started  
+**Status:** Implemented locally on 27 October 2026; see [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) and [VALIDATION.md](VALIDATION.md)
 **Owner:** Om Tiwari  
 **Selected direction:** Living poster · petrol green, metallic sage, scarlet and ivory  
 **Technical approach:** Responsive artwork with live HTML/CSS typography and controlled layered motion  
 **Existing foundation:** Next.js App Router, TypeScript, CSS Modules, GSAP/ScrollTrigger
+
+This document preserves the approved pre-implementation plan. Statements about assets not yet produced describe that planning checkpoint; the linked status and asset register describe the completed build.
 
 ## 1. The visual target
 

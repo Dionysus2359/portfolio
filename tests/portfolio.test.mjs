@@ -4,6 +4,8 @@ import { access, readFile } from "node:fs/promises";
 import { emailDraft } from "../src/lib/contact.ts";
 import { projects } from "../src/content/projects.ts";
 import sharp from "sharp";
+import { profile } from "../src/content/profile.ts";
+import { parseMotionChoice, shouldReduceMotion } from "../src/lib/motion.ts";
 
 test("email drafts encode visitor text without creating extra mail headers", () => {
   const url = emailDraft("omtiwari2359@gmail.com", {
@@ -46,7 +48,7 @@ test("every project has real local media and a complete independent case-study r
     }
     assert.ok(
       html.includes(
-        `canonical\" href=\"https://om-tiwari-studio.open-cloud-8145.chatgpt.site/work/${project.slug}/`,
+        `canonical\" href=\"${profile.origin}/work/${project.slug}/`,
       ),
     );
   }
@@ -57,8 +59,8 @@ test("the exported HTML contains identity, work and contact without executing Ja
   const visibleHtml = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
   for (const text of [
     "Om Tiwari",
-    "Websites",
-    "pulse",
+    "Made to",
+    "different.",
     "ACM SNU",
     "Surge",
     "mailto:omtiwari2359@gmail.com",
@@ -67,6 +69,30 @@ test("the exported HTML contains identity, work and contact without executing Ja
   for (const slug of ["acm", "surge", "adobe"])
     assert.ok(visibleHtml.includes(`/work/${slug}/`));
   assert.ok(!visibleHtml.includes('data-enhanced="true"'));
+  assert.equal((visibleHtml.match(/<h1\b/g) || []).length, 1);
+  assert.ok(visibleHtml.includes('<picture>'));
+  assert.ok(!visibleHtml.includes('/media/experience/'));
+});
+
+test("hero delivery files match their declared dimensions and contain no upscaled masters", async () => {
+  const delivery = JSON.parse(await readFile('assets/source/green-studio/delivery.json', 'utf8'));
+  assert.equal(delivery.length, 8);
+  for (const asset of delivery) {
+    const metadata = await sharp(`public${asset.file}`).metadata();
+    assert.equal(metadata.width, asset.width);
+    assert.equal(metadata.height, asset.height);
+    assert.ok(asset.width <= (asset.file.includes('portrait') ? 941 : 1672));
+    assert.ok(asset.bytes < 220 * 1024);
+  }
+});
+
+test("device motion preferences take precedence and invalid stored values fall back safely", () => {
+  assert.equal(parseMotionChoice('reduced'), 'reduced');
+  assert.equal(parseMotionChoice(null), 'full');
+  assert.equal(parseMotionChoice('invalid'), 'full');
+  assert.equal(shouldReduceMotion(true, 'full'), true);
+  assert.equal(shouldReduceMotion(false, 'reduced'), true);
+  assert.equal(shouldReduceMotion(false, 'full'), false);
 });
 
 test("contact and recovery pages exist and do not claim email delivery", async () => {

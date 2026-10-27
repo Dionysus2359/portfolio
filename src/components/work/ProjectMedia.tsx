@@ -45,7 +45,8 @@ export function ProjectMedia({
           width={project.poster.width}
           height={project.poster.height}
           sizes="(max-width: 700px) 100vw, 92vw"
-          priority={priority}
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : undefined}
         />
         <figcaption className={styles.mediaCaption}>
           {project.poster.kind === "capture"

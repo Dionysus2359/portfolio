@@ -47,3 +47,7 @@
   gap: 30px;
   margin-top: 30px;
 }
+.document h1, .error h1 { font-family: Bodoni Moda, Georgia, serif; font-weight: 400; letter-spacing: -.055em; color: #ff5149; }
+.error { background: radial-gradient(ellipse at 100% 10%, #234b3d 0, transparent 60%); }
+.error :global(.serif) { color: var(--ivory); }
+@media (max-width: 600px) { .error > div { flex-wrap: wrap; } .document h1 { font-size: 48px; } }

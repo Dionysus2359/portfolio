@@ -75,7 +75,7 @@
   margin: 0;
   overflow: hidden;
   position: relative;
-  background: #171223;
+  background: #0b322a;
   padding: 40px 6% 0;
   border: 1px solid var(--rule);
 }
@@ -92,10 +92,10 @@
   transform: scale(1.012);
 }
 .media.surge {
-  background: #d6d3cb;
+  background: #d8e2d8;
 }
 .media.adobe {
-  background: #241b19;
+  background: #041b18;
   padding: 0;
 }
 .media.adobe > img {
@@ -149,7 +149,7 @@
 }
 .adobe .mediaCaption {
   padding: 15px 6%;
-  color: #d0bcb3;
+  color: #b7c7bc;
 }
 .chapterBottom {
   display: grid;
@@ -258,7 +258,7 @@
   color: var(--muted);
 }
 .supporting {
-  background: #1a1a1a;
+  background: #0d332b;
   padding: 70px var(--gutter);
   display: grid;
   grid-template-columns: 0.7fr 1fr;
@@ -347,17 +347,6 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 30px;
   padding: 50px var(--gutter);
-}
-:global(main[data-experience="enhanced"]) .work {
-  padding-top: 5px;
-  scroll-margin-top: 100svh;
-}
-:global(main[data-experience="enhanced"]) .work > .sectionHeading,
-:global(main[data-experience="enhanced"])
-  .chapter:first-of-type
-  > .chapterHeading,
-:global(main[data-experience="enhanced"]) .chapter:first-of-type > .mediaLink {
-  display: none;
 }
 @media (max-width: 800px) {
   .chapterBottom {
@@ -543,7 +532,7 @@
 
 .auditEvidence {
   padding: 70px var(--gutter);
-  background: #201b18;
+  background: #082a25;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8%;
@@ -610,4 +599,47 @@
   .chapterBottom > div > p {
     font-size: 12px;
   }
+}
+
+/* Editorial chapters share the poster's materials; the supplied screens stay true to their colours. */
+.work { padding: 0; background: var(--ivory); color: var(--deep); --muted: #4b6558; --rule: #082a2530; --accent-soft: #a72b22; }
+.sectionHeading { padding: 105px var(--gutter) 95px; margin: 0; }
+.sectionHeading h2 { font-family: Bodoni Moda, Georgia, serif; font-size: clamp(55px, 6.4vw, 110px); font-weight: 400; letter-spacing: -.06em; line-height: .98; }
+.sectionHeading h2 :global(.serif) { color: #9b3028; }
+.sectionHeading p { padding-bottom: 5px; line-height: 1.8; }
+.chapter { padding: 60px var(--gutter) 70px; margin: 0; background: var(--petrol); color: var(--ivory); --muted: #b7c7bc; --rule: #f2edde35; --accent-soft: #ff7971; }
+.chapter:nth-of-type(2) { background: var(--soft-sage); color: var(--deep); --muted: #3f594d; --rule: #082a2535; --accent-soft: #a72b22; }
+.chapter:nth-of-type(3) { background: var(--deep); }
+.projectIndex { margin-bottom: 18px; }
+.projectIndex > span:first-child { color: currentColor; }
+.projectTitle h3 { font-family: Bodoni Moda, Georgia, serif; font-size: clamp(45px, 5.1vw, 85px); font-weight: 400; letter-spacing: -.05em; }
+.roundArrow { flex-shrink: 0; }
+.roundArrow svg { width: 22px; }
+.projectTitle:hover .roundArrow { background: var(--foreground); color: var(--deep); }
+.chapter:nth-of-type(2) .projectTitle:hover .roundArrow { background: var(--deep); color: var(--ivory); }
+.media { padding: 42px 5% 0; border-color: #a4bfb035; }
+.media > img { object-fit: contain; height: auto; }
+.chapterBottom { gap: 6%; padding-top: 32px; }
+.chapterBottom > p { max-width: 480px; }
+.caseHero { background: radial-gradient(ellipse at 85% 0%, #234b3d 0%, transparent 65%); padding-top: 55px; }
+.caseHero h1 { font-family: Bodoni Moda, Georgia, serif; font-weight: 400; letter-spacing: -.055em; }
+.caseCopy h2, .supporting h2, .detailHeading h2, .auditEvidence h2, .nextProject a { font-family: Bodoni Moda, Georgia, serif; font-weight: 400; }
+.caseCopy h2 { font-size: clamp(38px, 4vw, 64px); }
+.caseCopy .serif, .detailHeading .serif { color: var(--sage); }
+.supporting { background: var(--soft-sage); color: var(--deep); --muted: #3f594d; --rule: #082a2535; --accent-soft: #a72b22; }
+.supporting h2 { font-size: clamp(40px, 4.5vw, 70px); }
+.mobileCapture { border-color: #a4bfb0; }
+.nextProject { border-top: 1px solid var(--rule); }
+@media (max-width: 800px) { .sectionHeading { padding-top: 75px; padding-bottom: 65px; } }
+@media (max-width: 600px) {
+ .sectionHeading { padding-top: 65px; padding-bottom: 55px; }
+ .sectionHeading h2 { font-size: clamp(45px, 11vw, 64px); }
+ .sectionHeading p { max-width: 320px; }
+ .chapter { padding-top: 38px; padding-bottom: 45px; }
+ .projectTitle h3 { font-size: 40px; }
+ .projectIndex { font-size: 10px; gap: 22px; }
+ .projectIndex .eyebrow { font-size: 8px; }
+ .media { padding: 16px 3.5% 0; }
+ .media.adobe { padding: 0; }
+ .caseHero h1 { font-size: clamp(45px, 12vw, 62px); overflow-wrap: anywhere; }
 }

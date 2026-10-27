@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { profile } from "@/content/profile";
-import { Arrow, Mark } from "./Icons";
+import { Arrow } from "./Icons";
 import styles from "./Layout.module.css";
+import { EffectsToggle } from "@/components/motion/EffectsToggle";
 
 export function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerTop}>
         <Link href="/" className={styles.wordmark}>
-          <Mark />
           <span>Om Tiwari</span>
         </Link>
         <p>Independent mind. Thoughtful websites.</p>
@@ -25,7 +25,7 @@ export function Footer() {
           </a>
           <Link href="/privacy/">Privacy</Link>
         </div>
-        <span>Designed & built with intent.</span>
+        <EffectsToggle />
       </div>
     </footer>
   );

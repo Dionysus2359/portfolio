@@ -1,46 +1,14 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-
-const visited = new Set<string>();
+import { useEffect } from "react";
+import { useMotionPreferences } from "./MotionPreferences";
 
 // Copy remains server-rendered. Motion is attached only after its library loads.
 export function MotionDirector() {
   const pathname = usePathname();
-  const [allowed, setAllowed] = useState(false);
-
-  useEffect(() => {
-    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let memoryPreference: boolean | null = null;
-    const update = (event?: Event) => {
-      if (
-        event instanceof CustomEvent &&
-        typeof event.detail?.reduced === "boolean"
-      )
-        memoryPreference = event.detail.reduced;
-      else if (event?.type === "storage") memoryPreference = null;
-      let reduced = preference.matches;
-      try {
-        reduced ||=
-          memoryPreference ?? localStorage.getItem("om-effects") === "reduced";
-      } catch {
-        reduced ||= memoryPreference ?? false;
-      }
-      document.documentElement.dataset.motion = reduced ? "reduced" : "full";
-      setAllowed(!reduced);
-    };
-    update();
-    preference.addEventListener("change", update);
-    window.addEventListener("om-effects-change", update);
-    window.addEventListener("storage", update);
-    return () => {
-      preference.removeEventListener("change", update);
-      window.removeEventListener("om-effects-change", update);
-      window.removeEventListener("storage", update);
-      delete document.documentElement.dataset.motion;
-    };
-  }, []);
+  const { ready, reduced } = useMotionPreferences();
+  const allowed = ready && !reduced;
 
   useEffect(() => {
     if (!allowed) return;
@@ -63,40 +31,7 @@ export function MotionDirector() {
             const desktop = Boolean(context.conditions.desktop);
             const cleanups: (() => void)[] = [];
 
-            // The first visit gets a short opening; returning with Back stays immediate.
-            if (!visited.has(pathname)) {
-              const lines = gsap.utils.toArray<HTMLElement>("[data-hero-line]");
-              if (lines.length && window.scrollY < 100) {
-                gsap.fromTo(
-                  lines,
-                  { yPercent: 110, rotate: 3 },
-                  {
-                    yPercent: 0,
-                    rotate: 0,
-                    duration: 1.15,
-                    stagger: 0.12,
-                    ease: "power4.out",
-                    clearProps: "transform",
-                  },
-                );
-                gsap.fromTo(
-                  "[data-hero-detail]",
-                  { opacity: 0, y: 16 },
-                  {
-                    opacity: 1,
-                    y: 0,
-                    delay: 0.35,
-                    duration: 0.85,
-                    stagger: 0.08,
-                    ease: "power3.out",
-                    clearProps: "opacity,transform",
-                  },
-                );
-              }
-              visited.add(pathname);
-            }
-
-            // Never hide elements already in view, focused, or in the scene handoff.
+            // Attach reveals only below the initial viewport; focus always completes them.
             for (const group of gsap.utils.toArray<HTMLElement>(
               "[data-reveal-group]",
             )) {
@@ -174,6 +109,14 @@ export function MotionDirector() {
             }
 
             if (desktop) {
+              const hero = document.querySelector<HTMLElement>("[data-studio-hero]");
+              if (hero) {
+                gsap.to(hero, {
+                  "--exit-y": "16px",
+                  ease: "none",
+                  scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: .5 },
+                });
+              }
               for (const frame of gsap.utils.toArray<HTMLElement>(
                 "[data-media-drift]",
               )) {
@@ -191,20 +134,6 @@ export function MotionDirector() {
                     },
                   },
                 );
-              }
-              for (const star of gsap.utils.toArray<HTMLElement>(
-                "[data-orbit]",
-              )) {
-                gsap.to(star, {
-                  rotation: 150,
-                  ease: "none",
-                  scrollTrigger: {
-                    trigger: star.closest("section"),
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: 0.8,
-                  },
-                });
               }
               for (const core of gsap.utils.toArray<HTMLElement>(
                 "[data-magnetic]",

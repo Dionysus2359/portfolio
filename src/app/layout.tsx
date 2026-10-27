@@ -3,12 +3,13 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { profile } from "@/content/profile";
 import { MotionDirector } from "@/components/motion/MotionDirector";
+import { MotionPreferences } from "@/components/motion/MotionPreferences";
 import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.origin),
   title: {
-    default: "Om Tiwari — Websites with a pulse.",
+    default: "Om Tiwari — Made to feel different.",
     template: "%s · Om Tiwari",
   },
   description:
@@ -17,13 +18,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Om Tiwari",
-    title: "Websites with a pulse. — Om Tiwari",
+    title: "Made to feel different. — Om Tiwari",
     images: [
       {
         url: "/social-preview.png",
         width: 1200,
         height: 630,
-        alt: "Om Tiwari. Creative developer. Websites with a pulse.",
+        alt: "Om Tiwari. Creative developer. Made to feel different.",
       },
     ],
   },
@@ -38,7 +39,7 @@ export default function RootLayout({
       <head>
         <link
           rel="preload"
-          href="/fonts/space-grotesk-latin.woff2"
+          href="/fonts/bodoni-moda-latin.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
@@ -48,10 +49,12 @@ export default function RootLayout({
         <a href="#main" className="skip-link">
           Skip to content
         </a>
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
-        <MotionDirector />
+        <MotionPreferences>
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+          <MotionDirector />
+        </MotionPreferences>
       </body>
     </html>
   );

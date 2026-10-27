@@ -1,71 +1,88 @@
 # Verification record
 
-20 October 2026. Results describe the available environment, not all real devices.
+27 October 2026. This record describes the green Living poster build in the available local environment. Earlier O/gallery screenshots are historical assets, not evidence for this version.
 
 ## Automated checks
 
-- Strict TypeScript check passes (`npm run typecheck`).
-- Next.js production static export passes, generating home, all three case studies, contact, privacy, designed 404, robots and sitemap.
-- Four focused Node tests pass: encoded email-draft content; local project media/dimensions and exported case-study HTML (including additional screenshots); identity/work/email in HTML without executing JavaScript; contact honesty and recovery routes. On the current Node 26 runtime, `node --test --test-isolation=none --test-reporter=spec tests/portfolio.test.mjs` reports each test individually.
-- Dependency audit after updating Sharp to 0.35.5: zero known vulnerabilities.
+- Next.js 16.4.2 production static export passes: homepage, ACM/Surge/Adobe case studies, contact, privacy, designed 404, icon, robots and sitemap.
+- Strict TypeScript passes with `npm run typecheck`.
+- All six focused Node checks pass with `node --test --test-isolation=none --test-reporter=spec tests/portfolio.test.mjs`: email-draft encoding; project dimensions/content/independent routes; server-rendered identity/work/contact; native hero variants and dimensions; effective motion preference logic; honest contact/recovery pages.
+- Canonical checks derive the origin from configuration. Local review uses `http://localhost:3001`; no production origin is selected.
 - `git diff --check` passes.
+- HTTP smoke checks returned 200 for home, all three case studies, contact, privacy and the AVIF; an unknown route returned the designed 404.
+- The dependency change only removes Three.js, React Three Fiber and unused transitive packages. No framework migration or upgrade was included.
 
-The initial sandboxed build could not parse its compiler subprocess output. The same production build succeeded with the required process permissions; type checks remain enabled. Local server startup also required network/listening permissions.
+The build and local listening server used the required host process/network permission. The temporary no-script/image-failure and social-card test routes were removed by the final rebuild; neither ships in the export.
 
-## Browser checks performed
+## Browser review
 
-Codex in-app Chromium browser, CSS viewport widths 360, 390, 768, 1024 and 1440. Final 1440px hero/gallery screenshots were taken against the production export on port 3001, without development overlays.
+Codex in-app Chromium, against the production export on port 3001. The six-size sweep reported these actual CSS dimensions:
 
-- Hero sculpture and three spatial planes rendered in WebGL on desktop.
-- Scrolling revealed the gallery and moved the lead ACM plane into the DOM showcase.
-- Project anchors were aligned with the visible planes and ordinary fallback cards.
-- Reduce effects removed stage spacing and restored normal content. A discovered stale-visibility bug was fixed and rechecked: hero opacity 1, hero visibility visible, project links visible.
-- Re-enabling effects reinitialised the enhancement; a reduced-effects choice persisted through reload.
-- Narrow layouts did not initialise the scene and used the static poster/cards. The mobile poster placement and 360px About navigation were corrected after inspection.
-- No horizontal overflow was measured at 360, 390, 768, 1024 and 1440 CSS widths. The browser reserves a scrollbar, so measured content widths were 345, 375, 753, 1009 and 1425 respectively.
-- Contact fields were filled with test-only example information. “Prepare email draft” produced an encoded `mailto:` draft and showed explicit review/send instructions. No email was sent.
-- Typography slider accepted an arrow key (500 → 501); changing the audit example updated evidence, finding and recommendation.
-- ACM case-study navigation and refresh showed its independent page with no canvas. Browser Back returned to the prior home URL.
-- Keyboard Enter on the production spatial gallery's Surge link opened `/work/surge/`, with its correct title and no canvas.
-- HTTP smoke checks on the exact production export: home, ACM, Surge, Adobe, contact and privacy returned 200; an unknown project returned 404 with the designed recovery page.
-- The final clean mobile-export screenshot used an observed 355px viewport (the browser's viewport override settled below the requested 390px); it also showed no horizontal overflow. It is named `screenshots/mobile-355.jpg`. The earlier 390px check was separately verified at exactly 390px in development.
+| Viewport | Content width | Horizontal scroll width | Hero height |
+| --- | ---: | ---: | ---: |
+| 360 × 800 | 345 | 345 | 833 |
+| 390 × 844 | 375 | 375 | 849 |
+| 768 × 1024 | 753 | 753 | 1024 |
+| 1024 × 768 | 1009 | 1009 | 870 |
+| 1440 × 900 | 1425 | 1425 | 900 |
+| 1920 × 1080 | 1905 | 1905 | 1080 |
 
-## Motion and supplied-media revision
+The browser reserves a scrollbar. Short screens deliberately allow the hero to expand rather than clip the controls. Headline glyph bounds remained within the content at every tested size. Early narrow headline/About overflow was corrected before this sweep. The final mobile shading refinement was rechecked at 390 × 844 with no overflow.
 
-The baseline was committed and pushed before edits as `c5ae0b8`. The new revision was checked against the production export at observed 1309 × 909 desktop and 355 × 767 mobile viewports (the browser scaled the requested overrides).
+Performed checks:
 
-- WebGL rendered the replacement ACM/Surge screenshots at their own aspect ratios; projected gallery links followed the panels. Scrolling preserved the ACM-to-DOM handoff.
-- The section copy revealed on scroll, the About mark rotated, and desktop media drift was attached. Mobile omitted desktop drift and WebGL while retaining the normal-flow layout and full screenshot proportions.
-- Reduce effects removed the canvas and enhancement, restored all reveal items to opacity 1, removed media clipping, and kept the page free of horizontal overflow. The preference survived reload; enabling effects restored the scene.
-- The final preference check also confirmed CSS transitions are suppressed and computed scroll behavior is `auto`, including after GSAP restores its cached inline scroll style.
-- The ACM events and Surge campus-guide views loaded and revealed in their case studies. Each offers a full-size image link, captions and source context.
-- Both case-study layouts retained the full homepage screenshot ratio at the observed 355px mobile width, without overflow.
-- Keyboard Tab onto the Surge media link immediately completed its image reveal (opacity 1, no clipping); Enter opened the correct case study. No application console errors were recorded.
-- Screenshots: `screenshots/motion-gallery.jpg`, `screenshots/motion-home-mobile-355.jpg`, `screenshots/motion-surge-mobile-355.jpg`.
+- Compared the 1920 × 1080 and 1440 × 900 desktop compositions with the approved study: green metal/glass, red seam/reflections, live scarlet type, ivory copy and project index. The real Bodoni Moda glyphs are an interpretation of the generated lettering, not identical custom letterforms.
+- Fine-pointer movement revealed an aligned brighter scene and ivory lettering; bounded parallax settled. Clicking the visible Work navigation scrolled normally, cleared the pointer light and drove the small hero exit. No pinned stage or empty gallery spacing remains.
+- The desktop lighting layer uses the exact `currentSrc` of the base picture. Fresh desktop inventory contained one studio image (`desktop-1672.avif`) and two local font files. A fresh 390px load contained only `portrait-600.avif` and the same two fonts. Resizing can request a different responsive candidate, as expected.
+- No canvas is mounted. There are no Three.js/R3F packages or old scene chunks in the build.
+- Reduce effects restored all reveal items to opacity 1, removed media clipping and produced computed `scroll-behavior: auto`. The choice survived reload and keyboard navigation to Surge; Back preserved it. Enabling effects restored the full state and smooth anchor scrolling.
+- A final repeat-click regression was fixed: homepage Work/About use native fragment anchors, while inner routes retain client navigation back to the homepage. Work scrolled to 838px on both the first and second click with `#work` already active. From Surge, Work returned to the same section and restored the homepage anchor form.
+- Enter on the hero's Surge link opened the correct independent case study. Focusing the extra screenshot link completed its reveal; full-size capture links remain ordinary anchors.
+- The typography slider responded to an arrow key (600 → 601). Selecting Business information updated the illustrative audit evidence and recommendation.
+- Test-only name/email/message values produced the “Your draft is ready” state and correctly encoded `mailto:` content. No email app link was activated and no email was sent.
+- ACM, Surge, Adobe, contact, privacy and 404 were opened at the 390px viewport: each had 375px content/scroll widths and a solid inner-page header. The supplied desktop captures retain their full ratios; extra events/map views remain available.
+- A temporary copy of the exported HTML with all scripts removed and intentionally unavailable hero image URLs still showed the full green fallback, live headline, CTA and three case-study links without overflow. This was a controlled static-fallback check, not a network throttling benchmark.
+- No application console warnings/errors appeared on the normal final production load. Intentionally missing artwork in the fallback fixture is excluded from that statement.
 
-## Performance accounting
+## Captured evidence
 
-Run `node scripts/measure-bundles.mjs` after a production build. It reports gzip sizes, not actual network timings: initial home script tags, all emitted JavaScript chunks, additional chunks (including 3D/GSAP and other routes), locally hosted fonts and the compressed SVG poster. This deliberately includes the lazy scene cost rather than reporting only the initial route.
+| Screenshot | Purpose |
+| --- | --- |
+| `screenshots/green-hero-1920.jpg` | 16:9 widescreen composition |
+| `screenshots/green-hero-1440.jpg` | Desktop 1440 × 900 composition |
+| `screenshots/green-cursor-light.jpg` | Live type/scene lighting reveal |
+| `screenshots/green-hero-mobile-390.jpg` | Portrait artwork and final text shading |
+| `screenshots/green-work-1440.jpg` | Ivory work introduction and first chapter in normal flow |
+| `screenshots/green-about-mobile-390.jpg` | Deliberate About composition without a portrait |
+| `screenshots/green-surge-mobile-390.jpg` | Independent case page and real full-ratio capture |
 
-No Core Web Vitals field results or Lighthouse scores are claimed. No video/model/HDR downloads are needed. Public assets total about 0.66 MiB before hosting compression, including the four supplied screenshots.
+CSS viewport dimensions and capture buffers differ in this app. For example, the 1920 × 1080 view produced a 1905 × 1072 JPEG, and the 1440 × 900 view a 1425 × 891 JPEG. These captures were not upscaled to claim a larger render.
 
-Final build accounting (gzip, KiB):
+## Production asset accounting
 
-| Asset category | Size |
+`node scripts/measure-bundles.mjs` reports file bytes/gzip, not field timings:
+
+| Category | KiB |
 | --- | ---: |
-| Initial home JavaScript | 185.4 |
-| All JavaScript chunks, including lazy code and other routes | 478.5 |
-| Additional chunks beyond initial home scripts | 293.0 |
-| Two font files (original WOFF2 bytes) | 43.4 |
-| Hero vector poster (gzip) | 17.7 |
+| Initial home JavaScript, gzip | 183.6 |
+| All emitted JavaScript chunks, gzip | 238.2 |
+| Additional chunks/routes beyond initial home scripts | 54.6 |
+| Home styles, gzip | 8.0 |
+| Both referenced local WOFF2 fonts | 66.9 |
+| Largest desktop AVIF | 66.6 |
+| Selected mobile AVIF at DPR 1 | 34.9 |
+| Estimated critical desktop assets | 325.2 |
+| Estimated critical mobile assets | 293.5 |
 
-Initial route and deferred-code figures are below the plan's starting 250 KiB / 600 KiB budgets. These file sizes are not field-performance measurements.
+The critical estimates sum initial home script tags, home CSS, both fonts and the selected artwork; HTML, lazy images and later route-prefetch traffic are separate. Browser inventory confirmed responsive scene selection and a shared lighting URL. Total public assets are 2,102,206 bytes, including the social PNG and project media; lossless masters remain outside the public root.
 
-## Verification limits
+The previous revision emitted 478.5 KiB of JavaScript in total. Removing the 3D scene reduces that to 238.2 KiB while preserving the selected visual direction. No Lighthouse score, Core Web Vitals result or live-network performance claim is made.
 
-- No physical-phone or Safari session was available.
-- Operating-system reduced-motion changes, forced GPU context loss, a genuinely unsupported GPU and blocked local storage were not exercised end to end. Their code paths were reviewed; manual reduced effects and narrow-layout fallbacks were exercised.
-- No slow-network lab run or measured frame-time benchmark has been completed. Rendering uses modest geometry, a capped pixel ratio, idle ambient motion capped at 30 fps, and demand-driven settling, with visibility/intersection controls.
-- The available Three.js/R3F combination logs a Clock deprecation warning in development. No application console error was observed during the checked hero/gallery/contact interactions.
-- Real email delivery is intentionally unconfigured and untested. This build provides draft preparation and direct email, not a server transport.
-- Photography, exact award wording/evidence, interaction recordings and dated archives remain listed in `ASSETS.md` and `IMPLEMENTATION_STATUS.md`.
+## Limits and remaining checks
+
+- Safari and physical-phone sessions were unavailable.
+- Actual OS reduced-motion changes and blocked local storage were not exercised end to end. Their shared preference paths were reviewed; the pure preference helper and manual persistent control were tested.
+- Browser zoom shortcuts had no effect in this preview, so an actual 200% zoom/text session is not claimed. Narrow responsive reflow was tested instead.
+- No slow-network lab run, rendering frame-time benchmark, hidden-tab timing benchmark or field-performance session was completed. The hero's settling loop is bounded and stops offscreen/hidden or when effects are reduced by code design.
+- Real email delivery remains intentionally unconfigured. The shipped contact flow prepares a draft.
+- Real photography, exact Adobe award evidence and a publishing origin remain owner inputs. Their current fallbacks are complete; no hosting or remote source upload was performed.

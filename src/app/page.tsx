@@ -1,4 +1,4 @@
-import { ExperienceStage } from "@/components/experience/ExperienceStage";
+import { StudioHero } from "@/components/studio/StudioHero";
 import { ProjectChapter } from "@/components/work/ProjectChapter";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ExperimentsSection } from "@/components/sections/ExperimentsSection";
@@ -35,15 +35,15 @@ export default function Home() {
           __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
         }}
       />
-      <ExperienceStage />
+      <StudioHero />
       <section className={styles.work} id="work">
         <div className={styles.sectionHeading} data-reveal-group>
           <div data-reveal>
             <span className="eyebrow muted">Selected work / 01—03</span>
             <h2>
-              Made with intent.
+              A little character.
               <br />
-              <span className="serif">Built to be felt.</span>
+              <span className="serif">A lot of intent.</span>
             </h2>
           </div>
           <p data-reveal>

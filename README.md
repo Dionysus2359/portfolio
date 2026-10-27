@@ -1,48 +1,46 @@
 # Om Tiwari — Portfolio
 
-A cinematic personal studio built with Next.js App Router, TypeScript, CSS Modules, GSAP/ScrollTrigger and an isolated React Three Fiber scene.
+A green and scarlet personal studio built with Next.js 16.4.2, TypeScript, CSS Modules and GSAP. The opening pairs clean architectural artwork with live editorial type, a cursor light reveal and small depth responses. Real project captures lead into independent case studies.
 
-## Run
+## Run locally
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open the printed localhost URL. Use Node.js 22 or newer (implemented with Node 26.11.1).
+The development preview runs at `http://127.0.0.1:3000`. For the production export:
+
+```sh
+npm run build
+npm run preview
+```
+
+The export is in `out/`; its preview runs at `http://127.0.0.1:3001`. There is no server dependency or email credential requirement. The contact form prepares a draft for the visitor to review and send in their own email app.
+
+## Checks
 
 ```sh
 npm run typecheck
-npm run build
-npm test
+node --test --test-isolation=none --test-reporter=spec tests/portfolio.test.mjs
+node scripts/measure-bundles.mjs
 ```
 
-`next build` creates the static `out/` directory. Tests inspect this export, so build first. `npm run preview` (or `npm start`) serves that exact export on port 3001, including the designed 404. Production hosting should also support directory indexes and serve `404.html` for missing paths.
+Build before running the export checks. Artwork variants can be reproduced with `node scripts/prepare-assets.mjs`. The lossless sources and exact prompts are in `assets/source/green-studio/`.
 
-## Edit content
+## Content and implementation
 
-- `src/content/profile.ts`: contact links, canonical origin and optional portrait.
-- `src/content/projects.ts`: roles, case studies, live links, media and event photos.
-- `src/types/project.ts`: shared project and photograph types.
-- `src/components/experience/`: procedural sculpture, gallery and handoff.
-- `src/components/motion/MotionDirector.tsx`: route-aware heading, section, media and pointer animation.
+- `src/content/profile.ts`: public identity, links, configured origin and optional portrait.
+- `src/content/projects.ts`: roles, actual screenshots, case-study copy, evidence and optional event photography.
+- `src/content/studio.ts`: hero copy, artwork variants and crop positions.
+- `src/components/studio/`: server-rendered composition and small client motion island.
+- `src/components/motion/`: shared preferences, effects button and progressive section motion.
+- `src/components/work/`: full-ratio media and case-study presentation.
 
-Set `NEXT_PUBLIC_SITE_URL` before building for another host. Fonts are served locally and their OFL licenses are in `public/fonts/`.
+The device's reduced-motion preference takes precedence over the saved `om-effects` choice. Storage failure keeps a session choice in memory. Animation setup reverts on navigation and preference changes. No WebGL, canvas renderer, scroll pinning or idle render loop is required.
 
-## Photography
+## Publishing
 
-The About layout is complete without a photograph. Add an approved image to `public/media/`, then replace `profile.portrait: null` with a typed photo record. It needs `src`, `alt`, `width`, `height` and `crop: { desktop, mobile }`; caption and credit are optional. `heroPortrait: true` enables the small About-link portrait.
+Choose the production domain and set `NEXT_PUBLIC_SITE_URL` before the publishing build. The review default is `http://localhost:3001`; it is deliberately not a chosen production origin. The earlier Sites identity in `.openai/hosting.json` is historical and does not represent a live deployment. This implementation does not upload source or select a hosting provider.
 
-Add Adobe event photos to the Adobe record's `photographs` array with accurate captions and supplied photographer credits. No synthetic portrait or event photography is included.
-
-## Contact
-
-The site deliberately uses an email-draft flow. Required fields use native browser validation, then a draft can be opened in the visitor's own email app or copied. Nothing is submitted to a server, no leads are persisted, and no delivery success is claimed. A direct email link also works without JavaScript.
-
-## Rendering modes
-
-Desktop enhances only after hydration and a successful WebGL2 check. Reduced-motion, narrow layouts and failed graphics use the server-rendered poster and ordinary project cards. The “Reduce effects” choice is stored locally and also disables the page motion. The scene is lazy-loaded, caps idle sculpture/gallery motion at 30 fps, settles pointer/scroll input on demand, and stops rendering offscreen. It releases textures/materials/listeners on unmount. Native scrolling remains in control.
-
-Headlines reveal in sequence, sections and images enter on scroll, desktop project frames drift slightly, and the About mark rotates with scroll. Fine-pointer layouts add magnetic arrows. All copy is visible in the server HTML; motion attaches after its library loads and reverts on route or preference changes. Project screenshots retain their own aspect ratios in both DOM and WebGL.
-
-See `docs/IMPLEMENTATION_STATUS.md`, `docs/ASSETS.md`, `docs/VALIDATION.md` and `docs/CREDITS.md` for evidence and remaining inputs.
+See `docs/IMPLEMENTATION_STATUS.md`, `docs/ASSETS.md`, `docs/VALIDATION.md` and `docs/CREDITS.md` for completed work, verification and remaining owner inputs.
