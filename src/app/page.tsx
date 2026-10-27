@@ -37,8 +37,8 @@ export default function Home() {
       />
       <ExperienceStage />
       <section className={styles.work} id="work">
-        <div className={styles.sectionHeading}>
-          <div>
+        <div className={styles.sectionHeading} data-reveal-group>
+          <div data-reveal>
             <span className="eyebrow muted">Selected work / 01—03</span>
             <h2>
               Made with intent.
@@ -46,7 +46,7 @@ export default function Home() {
               <span className="serif">Built to be felt.</span>
             </h2>
           </div>
-          <p>
+          <p data-reveal>
             Different challenges, a shared belief:
             <br />
             the details make the difference.

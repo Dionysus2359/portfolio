@@ -6,44 +6,59 @@ import type { CSSProperties } from "react";
 export function ProjectMedia({
   project,
   priority = false,
+  motion = true,
 }: {
   project: PortfolioProject;
   priority?: boolean;
+  motion?: boolean;
 }) {
   return (
-    <figure className={`${styles.media} ${styles[project.slug]}`}>
-      <div className={styles.browserBar} aria-hidden="true">
-        <span>
-          <i />
-          <i />
-          <i />
-        </span>
-        <span>
-          {project.liveUrl
-            ? new URL(project.liveUrl).host
-            : "audit architecture / process study"}
-        </span>
-        <span>↗</span>
-      </div>
-      <Image
-        src={project.poster.src}
-        alt={project.poster.alt}
-        width={project.poster.width}
-        height={project.poster.height}
-        sizes="(max-width: 700px) 100vw, 92vw"
-        priority={priority}
-      />
-      <figcaption className={styles.mediaCaption}>
-        {project.poster.kind === "capture"
-          ? "Live-site capture · October 2026"
-          : "Project architecture · explanatory diagram"}
-        <span>
+    <div
+      className={styles.mediaDrift}
+      data-media-drift={motion ? "" : undefined}
+    >
+      <figure
+        className={`${styles.media} ${styles[project.slug]}`}
+        data-media-reveal={motion ? "" : undefined}
+        style={
+          {
+            "--media-aspect": `${project.poster.width} / ${project.poster.height}`,
+          } as CSSProperties
+        }
+      >
+        <div className={styles.browserBar} aria-hidden="true">
+          <span>
+            <i />
+            <i />
+            <i />
+          </span>
+          <span>
+            {project.liveUrl
+              ? new URL(project.liveUrl).host
+              : "audit architecture / process study"}
+          </span>
+          <span>↗</span>
+        </div>
+        <Image
+          src={project.poster.src}
+          alt={project.poster.alt}
+          width={project.poster.width}
+          height={project.poster.height}
+          sizes="(max-width: 700px) 100vw, 92vw"
+          priority={priority}
+        />
+        <figcaption className={styles.mediaCaption}>
           {project.poster.kind === "capture"
-            ? "DESKTOP VIEW"
-            : "READ-ONLY WORKFLOW"}
-        </span>
-      </figcaption>
-    </figure>
+            ? project.poster.caption || "Live-site capture · October 2026"
+            : "Project architecture · explanatory diagram"}
+          <span>
+            {project.poster.kind === "capture"
+              ? "DESKTOP VIEW"
+              : "READ-ONLY WORKFLOW"}
+          </span>
+        </figcaption>
+      </figure>
+    </div>
   );
 }
 

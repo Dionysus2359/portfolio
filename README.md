@@ -25,6 +25,7 @@ npm test
 - `src/content/projects.ts`: roles, case studies, live links, media and event photos.
 - `src/types/project.ts`: shared project and photograph types.
 - `src/components/experience/`: procedural sculpture, gallery and handoff.
+- `src/components/motion/MotionDirector.tsx`: route-aware heading, section, media and pointer animation.
 
 Set `NEXT_PUBLIC_SITE_URL` before building for another host. Fonts are served locally and their OFL licenses are in `public/fonts/`.
 
@@ -40,6 +41,8 @@ The site deliberately uses an email-draft flow. Required fields use native brows
 
 ## Rendering modes
 
-Desktop enhances only after hydration and a successful WebGL2 check. Reduced-motion, narrow layouts and failed graphics use the server-rendered poster and ordinary project cards. The “Reduce effects” choice is stored locally. The scene is lazy-loaded, renders on demand while interactions settle, and releases textures/materials/listeners on unmount. Native scrolling remains in control.
+Desktop enhances only after hydration and a successful WebGL2 check. Reduced-motion, narrow layouts and failed graphics use the server-rendered poster and ordinary project cards. The “Reduce effects” choice is stored locally and also disables the page motion. The scene is lazy-loaded, caps idle sculpture/gallery motion at 30 fps, settles pointer/scroll input on demand, and stops rendering offscreen. It releases textures/materials/listeners on unmount. Native scrolling remains in control.
+
+Headlines reveal in sequence, sections and images enter on scroll, desktop project frames drift slightly, and the About mark rotates with scroll. Fine-pointer layouts add magnetic arrows. All copy is visible in the server HTML; motion attaches after its library loads and reverts on route or preference changes. Project screenshots retain their own aspect ratios in both DOM and WebGL.
 
 See `docs/IMPLEMENTATION_STATUS.md`, `docs/ASSETS.md`, `docs/VALIDATION.md` and `docs/CREDITS.md` for evidence and remaining inputs.

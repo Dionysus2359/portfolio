@@ -81,7 +81,7 @@
 }
 .media > img {
   width: 100%;
-  aspect-ratio: 16/10;
+  aspect-ratio: var(--media-aspect, 16/10);
   object-fit: cover;
   object-position: top;
   border: 1px solid #ffffff1a;
@@ -410,8 +410,8 @@
     padding: 16px 4% 0;
   }
   .media > img {
-    aspect-ratio: 4/3;
-    object-fit: cover;
+    aspect-ratio: var(--media-aspect, 16/10);
+    object-fit: contain;
     object-position: center top;
   }
   .browserBar {
@@ -487,6 +487,57 @@
   }
   .editorialPhoto img {
     object-position: var(--crop-mobile);
+  }
+}
+
+.mediaDrift {
+  position: relative;
+}
+.detailScreenshots {
+  padding: 25px var(--gutter) 100px;
+}
+.detailHeading {
+  margin-bottom: 35px;
+}
+.detailHeading h2 {
+  font-size: clamp(35px, 4.3vw, 64px);
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+  margin-top: 20px;
+}
+.detailFigure {
+  margin: 0;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+}
+.detailFigure img {
+  width: 100%;
+  height: auto;
+}
+.detailFigure figcaption {
+  padding: 18px 22px;
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  gap: 25px;
+  justify-content: space-between;
+}
+.detailFigure figcaption > span {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+}
+@media (max-width: 600px) {
+  .detailScreenshots {
+    padding-top: 0;
+    padding-bottom: 60px;
+  }
+  .detailFigure figcaption {
+    font-size: 11px;
+    padding: 15px;
+  }
+  .detailFigure figcaption > span {
+    display: none;
   }
 }
 

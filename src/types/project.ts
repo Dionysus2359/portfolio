@@ -27,7 +27,15 @@ export interface PortfolioProject {
     width: number;
     height: number;
     kind: "capture" | "process-diagram";
+    caption?: string;
   };
+  screenshots?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    caption: string;
+  }[];
   mobilePoster?: { src: string; alt: string; width: number; height: number };
   accent: string;
   problem: string;

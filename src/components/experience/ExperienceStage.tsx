@@ -16,22 +16,30 @@ export function ExperienceStage() {
     >
       <div className={styles.sticky} data-stage-sticky>
         <div className={styles.hero} data-hero-copy>
-          <div className={styles.heroMeta}>
+          <div className={styles.heroMeta} data-hero-detail>
             <span className="eyebrow">Independent design & development</span>
             <span className={styles.availability}>
-              <i /> Open for select collaborations
+              <i data-availability-dot /> Open for select collaborations
             </span>
           </div>
           <div className={styles.headline}>
-            <h1>
-              Websites
-              <br />
-              <span className={`serif ${styles.italicLine}`}>with a</span>
-              <br />
-              pulse<span className={styles.period}>.</span>
+            <h1 aria-label="Websites with a pulse.">
+              <span className={styles.lineMask} aria-hidden="true">
+                <span data-hero-line>Websites</span>
+              </span>
+              <span className={styles.lineMask} aria-hidden="true">
+                <span className={`serif ${styles.italicLine}`} data-hero-line>
+                  with a
+                </span>
+              </span>
+              <span className={styles.lineMask} aria-hidden="true">
+                <span data-hero-line>
+                  pulse<span className={styles.period}>.</span>
+                </span>
+              </span>
             </h1>
           </div>
-          <div className={styles.heroIntro}>
+          <div className={styles.heroIntro} data-hero-detail>
             <p>
               I’m Om. I turn ideas into memorable
               <br className={styles.desktopBreak} /> websites and useful web
@@ -41,7 +49,7 @@ export function ExperienceStage() {
               Explore my work <Arrow diagonal />
             </Link>
           </div>
-          <div className={styles.objectLabel}>
+          <div className={styles.objectLabel} data-hero-detail>
             <span className="eyebrow">O—01 / A study in possibility</span>
             <span>One form. A different perspective.</span>
           </div>
@@ -53,7 +61,7 @@ export function ExperienceStage() {
             </span>
             <a href="#work" className={styles.scrollHint}>
               <span>Scroll to explore</span>
-              <span>↓</span>
+              <span data-scroll-cue>↓</span>
             </a>
             <span className={styles.heroNumber}>Design × Code × Curiosity</span>
           </div>
@@ -101,6 +109,11 @@ export function ExperienceStage() {
               href={`/work/${project.slug}/`}
               key={project.slug}
               data-project-link={project.slug}
+              style={
+                {
+                  "--card-aspect": `${project.poster.width} / ${project.poster.height}`,
+                } as React.CSSProperties
+              }
             >
               <div className={styles.cardImage}>
                 <Image
@@ -149,7 +162,7 @@ export function ExperienceStage() {
           </Link>
         </div>
         <Link href="/work/acm/" aria-label="Explore the ACM SNU case study">
-          <ProjectMedia project={projects[0]} />
+          <ProjectMedia project={projects[0]} motion={false} />
         </Link>
       </div>
     </section>

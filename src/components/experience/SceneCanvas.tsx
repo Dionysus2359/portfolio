@@ -200,12 +200,13 @@ function Scene({
   useEffect(() => {
     let frame = 0;
     let settling = 60;
+    let lastAmbientFrame = 0;
     let lastP = -1,
       lastX = -1,
       lastY = -1,
       lastHover = -2,
       lastActive = false;
-    const tick = () => {
+    const tick = (now: number) => {
       const input = shared.current;
       if (
         input.progress !== lastP ||
@@ -221,9 +222,12 @@ function Scene({
         lastHover = input.hovered;
         lastActive = input.active;
       }
-      if (input.active && settling > 0) {
+      const ambient =
+        input.progress < 0.77 && now - lastAmbientFrame >= 1000 / 30;
+      if (input.active && (settling > 0 || ambient)) {
         invalidate();
-        settling--;
+        settling = Math.max(0, settling - 1);
+        lastAmbientFrame = now;
       }
       frame = requestAnimationFrame(tick);
     };
@@ -231,11 +235,11 @@ function Scene({
     return () => cancelAnimationFrame(frame);
   }, [invalidate, shared]);
 
-  useFrame((_state, delta) => {
+  useFrame(({ clock }, delta) => {
     if (!shared.current.active) return;
     const input = shared.current,
       s = smooth.current;
-    const damp = 1 - Math.exp(-delta * 7);
+    const damp = 1 - Math.exp(-Math.min(delta, 0.1) * 7);
     s.p = THREE.MathUtils.lerp(s.p, input.progress, damp);
     s.x = THREE.MathUtils.lerp(s.x, input.pointer.x, damp);
     s.y = THREE.MathUtils.lerp(s.y, input.pointer.y, damp);
@@ -245,16 +249,22 @@ function Scene({
     camera.position.set(0, 0, 9);
     camera.lookAt(0, 0, 0);
     const aspect = size.width / size.height;
+    const time = clock.elapsedTime;
+    const calm = 1 - reveal;
     if (ribbon.current) {
       ribbon.current.position.set(
-        THREE.MathUtils.lerp(aspect * 1.8, 0, reveal) + s.x * 0.07,
-        THREE.MathUtils.lerp(0.05, 0.15, reveal) - s.y * 0.05,
+        THREE.MathUtils.lerp(aspect * 1.8, 0, reveal) +
+          s.x * 0.07 +
+          Math.sin(time * 0.55) * 0.025 * calm,
+        THREE.MathUtils.lerp(0.05, 0.15, reveal) -
+          s.y * 0.05 +
+          Math.sin(time * 0.8) * 0.06 * calm,
         THREE.MathUtils.lerp(0, -3, reveal),
       );
       ribbon.current.rotation.set(
-        0.18 + s.y * 0.06,
-        -0.38 + s.x * 0.12 + reveal * 1.5,
-        -0.32 + reveal * 1.2,
+        0.18 + s.y * 0.06 + Math.sin(time * 0.53) * 0.035 * calm,
+        -0.38 + s.x * 0.12 + reveal * 1.5 + Math.cos(time * 0.43) * 0.08 * calm,
+        -0.32 + reveal * 1.2 + Math.sin(time * 0.36) * 0.03 * calm,
       );
       ribbon.current.scale.setScalar(THREE.MathUtils.lerp(1.18, 2.7, reveal));
       ribbonMaterials.forEach((m) => {
@@ -263,9 +273,6 @@ function Scene({
       });
       ribbon.current.visible = reveal < 0.999;
     }
-    const planeOpacity =
-      THREE.MathUtils.smoothstep(p, 0.23, 0.4) *
-      (1 - THREE.MathUtils.smoothstep(p, 0.94, 1));
     const width = aspect > 1.6 ? 3.45 : 2.95,
       spacing = width * 1.12;
     for (let i = 0; i < 3; i++) {
@@ -273,14 +280,28 @@ function Scene({
       if (!mesh) continue;
       const side = i === 0 ? 0 : i === 1 ? -1 : 1;
       const hovered = input.hovered === i;
+      const entrance = THREE.MathUtils.smoothstep(
+        p,
+        0.25 + i * 0.025,
+        0.43 + i * 0.025,
+      );
+      const planeOpacity =
+        THREE.MathUtils.smoothstep(p, 0.23 + i * 0.025, 0.4 + i * 0.025) *
+        (1 - THREE.MathUtils.smoothstep(p, 0.94, 1));
+      const float = Math.sin(time * 0.7 + i * 2) * 0.035 * (1 - handoff);
+      const imageRatio = projects[i].poster.height / projects[i].poster.width;
       mesh.position.set(
         side * spacing * (1 + handoff * 0.6),
-        -0.3 + (hovered ? 0.08 : 0),
+        -0.3 + (hovered ? 0.08 : 0) - (1 - entrance) * 0.55 + float,
         side === 0 ? 0 : -0.65 - handoff * 2,
       );
-      mesh.rotation.set(0, side * -0.16 * (1 - handoff), side * 0.025);
+      mesh.rotation.set(
+        hovered ? -s.y * 0.035 : 0,
+        side * -0.16 * (1 - handoff) + (hovered ? s.x * 0.04 : 0),
+        side * 0.025 + Math.sin(time * 0.55 + i) * 0.006 * (1 - handoff),
+      );
       const scale = width * (hovered ? 1.035 : 1);
-      mesh.scale.set(scale, scale * 0.625, 1);
+      mesh.scale.set(scale, scale * imageRatio, 1);
       if (i === 0 && input.handoff && input.sticky && handoff > 0) {
         const bounds = input.handoff.getBoundingClientRect();
         const origin = input.sticky.getBoundingClientRect();
@@ -297,7 +318,11 @@ function Scene({
         mesh.position.y = THREE.MathUtils.lerp(-0.3, y, handoff);
         mesh.scale.set(
           THREE.MathUtils.lerp(scale, targetWidth, handoff),
-          THREE.MathUtils.lerp(scale * 0.625, targetWidth * 0.625, handoff),
+          THREE.MathUtils.lerp(
+            scale * imageRatio,
+            targetWidth * imageRatio,
+            handoff,
+          ),
           1,
         );
       }

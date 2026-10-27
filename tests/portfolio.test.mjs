@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import { emailDraft } from "../src/lib/contact.ts";
 import { projects } from "../src/content/projects.ts";
+import sharp from "sharp";
 
 test("email drafts encode visitor text without creating extra mail headers", () => {
   const url = emailDraft("omtiwari2359@gmail.com", {
@@ -29,11 +30,20 @@ test("every project has real local media and a complete independent case-study r
   for (const project of projects) {
     await access(`public${project.poster.src}`);
     if (project.mobilePoster) await access(`public${project.mobilePoster.src}`);
+    for (const media of [project.poster, ...(project.screenshots || [])]) {
+      const actual = await sharp(`public${media.src}`).metadata();
+      assert.equal(actual.width, media.width, `${media.src} width`);
+      assert.equal(actual.height, media.height, `${media.src} height`);
+    }
     assert.ok(project.decisions.length >= 3);
     assert.ok(project.evidenceNotes.length >= 2);
     const html = await readFile(`out/work/${project.slug}/index.html`, "utf8");
     assert.ok(html.includes(project.title));
     assert.ok(html.includes("The idea behind"));
+    for (const screenshot of project.screenshots || []) {
+      assert.ok(html.includes(screenshot.src));
+      assert.ok(html.includes(screenshot.alt));
+    }
     assert.ok(
       html.includes(
         `canonical\" href=\"https://om-tiwari-studio.open-cloud-8145.chatgpt.site/work/${project.slug}/`,

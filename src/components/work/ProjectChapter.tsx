@@ -12,15 +12,21 @@ export function ProjectChapter({ project }: { project: PortfolioProject }) {
       id={`project-${project.slug}`}
       style={{ "--project-accent": project.accent } as CSSProperties}
     >
-      <div className={styles.chapterHeading}>
-        <div className={styles.projectIndex}>
+      <div className={styles.chapterHeading} data-reveal-group>
+        <div className={styles.projectIndex} data-reveal>
           <span>{project.number}</span>
           <span className="eyebrow">{project.category}</span>
         </div>
-        <Link href={`/work/${project.slug}/`} className={styles.projectTitle}>
+        <Link
+          href={`/work/${project.slug}/`}
+          className={styles.projectTitle}
+          data-reveal
+        >
           <h3>{project.title}</h3>
           <span className={styles.roundArrow}>
-            <Arrow diagonal />
+            <span data-magnetic>
+              <Arrow diagonal />
+            </span>
           </span>
         </Link>
       </div>
@@ -31,13 +37,13 @@ export function ProjectChapter({ project }: { project: PortfolioProject }) {
       >
         <ProjectMedia project={project} />
       </Link>
-      <div className={styles.chapterBottom}>
-        <p>{project.summary}</p>
-        <div>
+      <div className={styles.chapterBottom} data-reveal-group>
+        <p data-reveal>{project.summary}</p>
+        <div data-reveal>
           <span className="eyebrow muted">My part</span>
           <p>{project.role}</p>
         </div>
-        <Link href={`/work/${project.slug}/`} className="text-link">
+        <Link href={`/work/${project.slug}/`} className="text-link" data-reveal>
           Explore project <Arrow diagonal />
         </Link>
       </div>

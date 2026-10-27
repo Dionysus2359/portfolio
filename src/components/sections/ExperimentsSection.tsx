@@ -36,15 +36,19 @@ export function ExperimentsSection() {
   const id = useId();
   return (
     <section className={styles.experiments} id="experiments">
-      <div className={styles.experimentsHeading}>
-        <span className="eyebrow">The playground / 02 experiments</span>
-        <h2>
+      <div className={styles.experimentsHeading} data-reveal-group>
+        <span className="eyebrow" data-reveal>
+          The playground / 02 experiments
+        </span>
+        <h2 data-reveal>
           Because <span className="serif">what if?</span>
         </h2>
-        <p>Small ideas. Real interactions. A little room to play.</p>
+        <p data-reveal>
+          Small ideas. Real interactions. A little room to play.
+        </p>
       </div>
-      <div className={styles.experimentGrid}>
-        <article className={styles.typeExperiment}>
+      <div className={styles.experimentGrid} data-reveal-group>
+        <article className={styles.typeExperiment} data-reveal>
           <div className={styles.experimentMeta}>
             <span>01 / VARIABLE TYPE</span>
             <span>INTERACTIVE STUDY ↙</span>
@@ -75,7 +79,7 @@ export function ExperimentsSection() {
             </p>
           </div>
         </article>
-        <article className={styles.auditExperiment}>
+        <article className={styles.auditExperiment} data-reveal>
           <div className={styles.experimentMeta}>
             <span>02 / EVIDENCE TO ACTION</span>
             <span>LOCAL SAMPLE</span>

@@ -20,10 +20,21 @@ export const projects: PortfolioProject[] = [
     poster: {
       src: "/media/projects/acm/desktop.webp",
       alt: "The actual ACM SNIoE homepage, with a pixel-art character, purple clouds and an invitation to the computing community",
-      width: 1440,
-      height: 900,
+      width: 1600,
+      height: 904,
       kind: "capture",
+      caption: "Screenshot supplied by Om · October 2026",
     },
+    screenshots: [
+      {
+        src: "/media/projects/acm/events.webp",
+        alt: "ACM SNIoE featured-events section, showing the ICPC Preparation Series on a pixel-art parchment board",
+        width: 1600,
+        height: 900,
+        caption:
+          "Featured events, presented as quests inside the chapter’s pixel-art world. Screenshot supplied by Om.",
+      },
+    ],
     mobilePoster: {
       src: "/media/projects/acm/mobile.webp",
       alt: "ACM SNIoE homepage on a narrow screen",
@@ -48,7 +59,7 @@ export const projects: PortfolioProject[] = [
       },
     ],
     evidenceNotes: [
-      "Current live-site captures taken on 20 October 2026; the live website may evolve.",
+      "Desktop and events screenshots supplied by Om on 20 October 2026; mobile view captured from the live site. The website may evolve.",
       "Independent authorship is supplied by Om and credited in the live site's footer.",
       "A separately deployed historical archive and recordings are not yet available.",
     ],
@@ -73,10 +84,21 @@ export const projects: PortfolioProject[] = [
     poster: {
       src: "/media/projects/surge/desktop.webp",
       alt: "The actual Surge sports festival website with its bold sports identity and event navigation",
-      width: 1440,
+      width: 1600,
       height: 900,
       kind: "capture",
+      caption: "Screenshot supplied by Om · October 2026",
     },
+    screenshots: [
+      {
+        src: "/media/projects/surge/campus-map.webp",
+        alt: "Surge campus guide showing a three-dimensional campus map, place filters and details for the Indoor Sports Complex",
+        width: 1600,
+        height: 899,
+        caption:
+          "The campus guide, with place search, category filters and venue details visible in Om’s supplied capture.",
+      },
+    ],
     mobilePoster: {
       src: "/media/projects/surge/mobile.webp",
       alt: "Surge sports festival homepage on a narrow screen",
@@ -97,11 +119,11 @@ export const projects: PortfolioProject[] = [
       },
       {
         title: "Show the shipped experience.",
-        body: "The current public site is available to explore. No registration, traffic or conversion figures are claimed here, and unfinished map features are excluded from this case study.",
+        body: "The opening sets the festival’s tone; the supplied campus-guide view shows the more practical side of the platform, with place filters and venue details. The public site is linked for exploration.",
       },
     ],
     evidenceNotes: [
-      "Current live-site captures taken on 20 October 2026; these are not a frozen archive.",
+      "Desktop and campus-guide screenshots supplied by Om on 20 October 2026; mobile view captured from the live site. These are not a frozen archive.",
       "The original platform predates Om's redesign and rearchitecture.",
       "Operational integrations remain on the real site; none are replicated in this portfolio.",
     ],

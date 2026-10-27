@@ -72,7 +72,7 @@ export default async function ProjectPage({
       <div className={styles.caseVisual}>
         <ProjectMedia project={project} priority />
       </div>
-      <section className={styles.caseDetails}>
+      <section className={styles.caseDetails} data-reveal-group>
         <aside className={styles.caseAside}>
           <div>
             <h2 className="eyebrow">My role</h2>
@@ -96,14 +96,14 @@ export default async function ProjectPage({
           </div>
         </aside>
         <div className={styles.caseCopy}>
-          <h2>
+          <h2 data-reveal>
             The idea behind
             <br />
             <span className="serif">the experience.</span>
           </h2>
-          <p>{project.problem}</p>
+          <p data-reveal>{project.problem}</p>
           {project.decisions.map((decision, index) => (
-            <div key={decision.title} className={styles.decision}>
+            <div key={decision.title} className={styles.decision} data-reveal>
               <span>0{index + 1} / THE DECISION</span>
               <h3>{decision.title}</h3>
               <p>{decision.body}</p>
@@ -111,6 +111,45 @@ export default async function ProjectPage({
           ))}
         </div>
       </section>
+      {project.screenshots && project.screenshots.length > 0 && (
+        <section
+          className={styles.detailScreenshots}
+          aria-label="More project views"
+        >
+          <div className={styles.detailHeading} data-reveal-group>
+            <span className="eyebrow muted" data-reveal>
+              A closer look
+            </span>
+            <h2 data-reveal>
+              Beyond the <span className="serif">first impression.</span>
+            </h2>
+          </div>
+          {project.screenshots.map((screenshot) => (
+            <div key={screenshot.src} data-media-drift>
+              <figure className={styles.detailFigure} data-media-reveal>
+                <a
+                  href={screenshot.src}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Open full-size screenshot: ${screenshot.alt}`}
+                >
+                  <Image
+                    src={screenshot.src}
+                    alt={screenshot.alt}
+                    width={screenshot.width}
+                    height={screenshot.height}
+                    sizes="92vw"
+                  />
+                </a>
+                <figcaption>
+                  {screenshot.caption}
+                  <span aria-hidden="true">OPEN IMAGE ↗</span>
+                </figcaption>
+              </figure>
+            </div>
+          ))}
+        </section>
+      )}
       {project.slug === "adobe" && <AuditEvidence />}
       {project.mobilePoster && (
         <section className={styles.supporting}>

@@ -259,6 +259,7 @@ export function ExperienceClient() {
       /* Preference applies in memory. */
     }
     setReduced(next);
+    window.dispatchEvent(new CustomEvent("om-effects-change", { detail: { reduced: next } }));
     if (next) {
       setEnabled(false);
       setReady(false);

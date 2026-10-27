@@ -45,6 +45,16 @@
   letter-spacing: -0.075em;
   font-weight: 500;
 }
+.lineMask {
+  display: block;
+  overflow: clip;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+.lineMask > span {
+  display: block;
+  transform-origin: 0 100%;
+}
 .italicLine {
   display: inline-block;
   margin: 0 0 0 15.5vw;
@@ -151,7 +161,7 @@
 .cardImage {
   overflow: hidden;
   background: #222;
-  aspect-ratio: 16/10;
+  aspect-ratio: var(--card-aspect, 16/10);
 }
 .cardImage img {
   width: 100%;

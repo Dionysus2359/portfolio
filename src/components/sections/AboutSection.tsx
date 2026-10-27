@@ -8,28 +8,31 @@ export function AboutSection() {
     <section
       id="about"
       className={`${styles.about} ${profile.portrait ? styles.withPortrait : ""}`}
+      data-reveal-group
     >
       <div className={styles.aboutLabel}>
-        <span className="eyebrow">A little about the person</span>
-        <span className={styles.smallStar} aria-hidden="true">
+        <span className="eyebrow" data-reveal>
+          A little about the person
+        </span>
+        <span className={styles.smallStar} aria-hidden="true" data-orbit>
           ✳
         </span>
         {profile.portrait && <Photo photo={profile.portrait} portrait />}
       </div>
       <div className={styles.aboutContent}>
-        <h2>
+        <h2 data-reveal>
           A curious mind.
           <br />A builder’s instinct.
           <br />
           <span className="serif">A thing for the details.</span>
         </h2>
         <div className={styles.aboutCopy}>
-          <p>
+          <p data-reveal>
             I’m Om Tiwari, a creative developer at Shiv Nadar University. I like
             the space where design and engineering meet — where an idea becomes
             something you can actually use.
           </p>
-          <p>
+          <p data-reveal>
             From a playful computing community to a full festival platform, I
             care about how a website feels and how well it works. I bring both
             sides to the same table.
@@ -44,19 +47,19 @@ export function AboutSection() {
           More about me <Arrow diagonal />
         </a>
         <div className={styles.approach}>
-          <div>
+          <div data-reveal>
             <span>01</span>
             <h3>Find the idea.</h3>
             <p>The audience, the purpose, the thing that makes it yours.</p>
           </div>
-          <div>
+          <div data-reveal>
             <span>02</span>
             <h3>Make it feel right.</h3>
             <p>
               Type, space and interaction, with a reason behind each choice.
             </p>
           </div>
-          <div>
+          <div data-reveal>
             <span>03</span>
             <h3>Build it properly.</h3>
             <p>Responsive development, careful checks and room to grow.</p>
