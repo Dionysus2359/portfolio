@@ -1,15 +1,15 @@
 "use client";
 import { useRef, useState } from "react";
 import { profile } from "@/content/profile";
-import { emailDraft } from "@/lib/contact";
+import { createEmailDraft } from "@/lib/contact";
 import { Arrow } from "@/components/layout/Icons";
 import styles from "./Contact.module.css";
 
 export function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
-  const [draft, setDraft] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
-  const [message, setMessage] = useState("");
+  const [draft, setDraft] = useState<ReturnType<typeof createEmailDraft> | null>(null);
+  const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "failed">("idle");
+  const [appRequested, setAppRequested] = useState(false);
   const prepare = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!form.current?.reportValidity()) return;
@@ -23,18 +23,17 @@ export function ContactForm() {
       timeline: read("timeline"),
       budget: read("budget"),
     };
-    setDraft(emailDraft(profile.email, enquiry));
-    setMessage(
-      `To: ${profile.email}\n\nHi Om,\n\n${enquiry.message}\n\nFrom: ${enquiry.name} <${enquiry.email}>\nProject: ${enquiry.projectType || "Not specified"}\nTimeline: ${enquiry.timeline || "Not specified"}\nBudget: ${enquiry.budget || "Not specified"}`,
-    );
-    setCopied(false);
+    setDraft(createEmailDraft(profile.email, enquiry));
+    setCopyStatus("idle");
+    setAppRequested(false);
   };
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(message);
-      setCopied(true);
+      if (!draft) return;
+      await navigator.clipboard.writeText(draft.text);
+      setCopyStatus("copied");
     } catch {
-      setCopied(false);
+      setCopyStatus("failed");
     }
   };
   return (
@@ -114,30 +113,41 @@ export function ContactForm() {
           Prepare email draft <Arrow diagonal />
         </button>
         <p>
-          This prepares a draft for your email app.
+          Choose Gmail or your email app to review and send.
           <br />
           Nothing is sent or stored by this website.
         </p>
       </div>
+      <p className="sr-only" role="status">
+        {draft ? "Your email draft is ready to review below." : ""}
+      </p>
       {draft && (
-        <div className={styles.draft} role="status">
+        <div className={styles.draft}>
           <h2>Your draft is ready.</h2>
           <p>
-            Open it in your email app, review it, then send it there. If no
-            email app is configured, copy the text below into your preferred
-            email service.
+            Open it in Gmail or your email app, review it, then send it there.
+            You can also copy the full draft into another email service.
           </p>
-          <div>
-            <a className="button-link" href={draft}>
-              Open email draft <Arrow diagonal />
+          <dl className={styles.draftHeaders}>
+            <div><dt>To</dt><dd>{draft.to}</dd></div>
+            <div><dt>Subject</dt><dd>{draft.subject}</dd></div>
+          </dl>
+          <div className={styles.draftActions}>
+            <a className="button-link" href={draft.gmail} target="_blank" rel="noreferrer">
+              Open in Gmail <Arrow diagonal />
+            </a>
+            <a className={styles.emailApp} href={draft.mailto} onClick={() => setAppRequested(true)}>
+              Use email app <Arrow diagonal />
             </a>
             <button type="button" onClick={copy}>
-              {copied ? "Draft copied ✓" : "Copy draft text"}
+              {copyStatus === "copied" ? "Draft copied ✓" : "Copy draft text"}
             </button>
           </div>
-          <details>
-            <summary>View draft text</summary>
-            <pre>{message}</pre>
+          {appRequested && <p role="status">If your email app didn’t open, use Gmail or copy the draft. This option needs a default email app set up in your browser.</p>}
+          {copyStatus === "failed" && <p role="status">Copy isn’t available here. Select and copy the full draft below.</p>}
+          <details open={copyStatus === "failed" || undefined}>
+            <summary>View full draft text</summary>
+            <pre>{draft.text}</pre>
           </details>
         </div>
       )}

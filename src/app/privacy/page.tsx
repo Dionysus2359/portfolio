@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <article className={styles.document}>
-      <span className="eyebrow muted">Last updated / 20 October 2026</span>
+      <span className="eyebrow muted">Last updated / 28 October 2026</span>
       <h1>
         A little clarity
         <br />
@@ -24,9 +24,10 @@ export default function PrivacyPage() {
       <p>
         The contact form prepares an email draft locally in your browser. Form
         details are not submitted to this website, saved in browser storage or
-        sent to a server. Choosing “Open email draft” hands the draft to your
-        configured email app, where you can review and send it. Your email
-        provider handles any email you choose to send.
+        sent to this website’s server. Choosing “Open in Gmail” passes the draft
+        to Google in a new browser tab; “Use email app” hands it to your configured
+        email app. You can review and send it there, or copy the text into another
+        service. Your email provider handles drafts and emails you choose to send.
       </p>
       <p>
         When you email me, I use your message and contact details to respond and

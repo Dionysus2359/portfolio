@@ -12,7 +12,7 @@
 - Complete identity across work, About, playground, contact, three case studies, privacy and custom 404; updated local fonts, OT favicon and social preview.
 - Original ACM/Surge captures and additional events/map views, accurate roles, full image ratios and explicit Adobe diagram context.
 - Portrait-ready About composition, typed photograph metadata/crops, and deliberate typography while photographs are pending.
-- Keyboard-operable variable-font and evidence examples; contact draft preparation, review link, copyable text and direct email fallback.
+- Keyboard-operable variable-font and evidence examples; contact draft preparation with visible recipient/subject, Gmail and email-app links, matching copyable text and a direct email fallback.
 - Retired the O, long pinned gallery/handoff, hiding rules, scene assets and all Three.js/R3F dependencies. No WebGL or perpetual renderer is needed.
 - Asset/bundle scripts, focused tests, source notes, screenshots and validation record updated.
 

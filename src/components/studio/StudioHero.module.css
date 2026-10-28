@@ -25,8 +25,9 @@
   font-family: "Bodoni Moda", Georgia, serif;
   font-size: clamp(108px, 10.6vw, 235px);
   font-weight: 600; font-optical-sizing: none; font-variation-settings: "opsz" var(--serif-optical-size);
-  letter-spacing: -.065em; line-height: .85; text-transform: uppercase;
-  color: #ff3931; width: 142%; transform: scaleX(.7); transform-origin: left center;
+  /* Keep adjacent serifs separate in the condensed display composition. */
+  font-kerning: none; letter-spacing: 0; line-height: .85; text-transform: uppercase;
+  color: #ff3931; width: 159%; transform: scaleX(.63); transform-origin: left center;
 }
 .headline > span { display: block; white-space: nowrap; }
 .headlineLight { position: absolute; inset: 0; color: var(--ivory); pointer-events: none; opacity: var(--light-alpha, 0); clip-path: ellipse(169px 118px at var(--type-x, -300px) var(--type-y, -300px)); }
@@ -48,7 +49,7 @@
 .scrollNote > span { font-size: 22px; }
 @media (min-width: 1800px) { .hero { padding-bottom: 50px; } .projectIndex { width: 850px; } }
 @media (min-width: 768px) and (max-width: 1199px) {
-  .headline { font-size: 13.5vw; line-height: .86; width: 138%; transform: scaleX(.7); }
+  .headline { font-size: 13.5vw; line-height: .86; }
   .headline > span:nth-child(2) { white-space: normal; }
   .lastWord { display: block; }
   .hero { gap: 90px; }
@@ -59,7 +60,7 @@
 @media (max-width: 767px) {
   .hero { min-height: 100svh; padding-top: 130px; padding-bottom: 27px; gap: 170px; }
   .hero::after { background: linear-gradient(180deg, #041b1833 0%, #041b18b3 35%, #041b1880 48%, transparent 68%), linear-gradient(0deg, #041b18b3, transparent 30%); }
-  .headline { font-size: clamp(62px, 20vw, 146px); line-height: .86; letter-spacing: -.055em; width: 130%; transform: scaleX(.77); }
+  .headline { font-size: clamp(62px, 20vw, 146px); line-height: .86; width: 145%; transform: scaleX(.69); }
   .headline > span:nth-child(2) { white-space: normal; }
   .lastWord { display: block; }
   .headlineLight, .light { display: none; }

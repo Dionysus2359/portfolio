@@ -1,14 +1,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
-import { emailDraft } from "../src/lib/contact.ts";
+import { createEmailDraft } from "../src/lib/contact.ts";
 import { projects } from "../src/content/projects.ts";
 import sharp from "sharp";
 import { profile } from "../src/content/profile.ts";
 import { parseMotionChoice, shouldReduceMotion } from "../src/lib/motion.ts";
 
 test("email drafts encode visitor text without creating extra mail headers", () => {
-  const url = emailDraft("omtiwari2359@gmail.com", {
+  const draft = createEmailDraft("omtiwari2359@gmail.com", {
     name: "A & B\nBcc: other@example.com",
     email: "visitor@example.com",
     message: "A website? Budget ₹6,000 & a gallery.\nPlease call it ‘Pulse’.",
@@ -16,12 +16,20 @@ test("email drafts encode visitor text without creating extra mail headers", () 
     timeline: "Flexible",
     budget: "₹6,000",
   });
-  assert.ok(url.startsWith("mailto:omtiwari2359@gmail.com?subject="));
-  assert.equal(url.split("&").length, 2);
-  const params = new URLSearchParams(url.split("?")[1]);
+  assert.ok(draft.mailto.startsWith("mailto:omtiwari2359@gmail.com?subject="));
+  assert.equal(draft.mailto.split("&").length, 2);
+  const params = new URLSearchParams(draft.mailto.split("?")[1]);
   assert.match(params.get("body"), /Budget ₹6,000 & a gallery/);
   assert.match(params.get("body"), /Reply to: visitor@example.com/);
   assert.equal(params.has("bcc"), false);
+  assert.equal(params.get("subject"), "Website enquiry from A & B Bcc: other@example.com");
+  assert.equal(params.get("subject"), draft.subject);
+  assert.equal(params.get("body"), draft.body);
+  assert.equal(draft.text, `To: ${draft.to}\nSubject: ${draft.subject}\n\n${draft.body}`);
+  const gmail = new URL(draft.gmail);
+  assert.equal(gmail.origin, "https://mail.google.com");
+  assert.equal(gmail.searchParams.get("extsrc"), "mailto");
+  assert.equal(gmail.searchParams.get("url"), draft.mailto);
 });
 
 test("every project has real local media and a complete independent case-study route", async () => {

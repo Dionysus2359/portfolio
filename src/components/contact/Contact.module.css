@@ -127,12 +127,24 @@
   max-width: 650px;
   margin: 12px 0 25px;
 }
-.draft > div {
+.draftActions {
   display: flex;
   gap: 25px;
   align-items: center;
   flex-wrap: wrap;
 }
+.draftHeaders {
+  margin: 0 0 25px;
+  padding: 18px 0;
+  border-block: 1px solid var(--rule);
+  font-size: 13px;
+}
+.draftHeaders > div { display: grid; grid-template-columns: 65px minmax(0, 1fr); gap: 15px; }
+.draftHeaders > div + div { margin-top: 10px; }
+.draftHeaders dt { color: var(--muted); }
+.draftHeaders dd { margin: 0; overflow-wrap: anywhere; }
+.emailApp { display: inline-flex; align-items: center; gap: 15px; min-height: 44px; font-size: 12px; }
+.emailApp svg { width: 16px; height: 16px; }
 .draft button {
   background: none;
   border: 0;
