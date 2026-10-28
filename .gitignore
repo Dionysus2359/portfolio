@@ -1,11 +1,19 @@
-plans_docs/
-node_modules/
-.next/
-next-env.d.ts
-out/
-.sites-runtime/
+# Local notes, source artwork and retired hosting material
+/plans_docs/
+/docs/
+/assets/source/
+/.openai/
+/.sites-runtime/
+
+# Dependencies and generated files
+/node_modules/
+/.next/
+/next-env.d.ts
+/out/
+*.tsbuildinfo
+
+# Local configuration and archives
 .env*
 !.env.example
-*.tsbuildinfo
 *.tar.gz
 .DS_Store

@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import { createEmailDraft } from "../src/lib/contact.ts";
 import { projects } from "../src/content/projects.ts";
+import { studio } from "../src/content/studio.ts";
 import sharp from "sharp";
 import { siteOrigin } from "../src/lib/site-origin.ts";
 import { parseMotionChoice, shouldReduceMotion } from "../src/lib/motion.ts";
@@ -82,15 +83,19 @@ test("the exported HTML contains identity, work and contact without executing Ja
   assert.ok(!visibleHtml.includes('/media/experience/'));
 });
 
-test("hero delivery files match their declared dimensions and contain no upscaled masters", async () => {
-  const delivery = JSON.parse(await readFile('assets/source/green-studio/delivery.json', 'utf8'));
-  assert.equal(delivery.length, 8);
-  for (const asset of delivery) {
-    const metadata = await sharp(`public${asset.file}`).metadata();
-    assert.equal(metadata.width, asset.width);
-    assert.equal(metadata.height, asset.height);
-    assert.ok(asset.width <= (asset.file.includes('portrait') ? 941 : 1672));
-    assert.ok(asset.bytes < 220 * 1024);
+test("configured hero variants have the correct dimensions and stay within the size budget", async () => {
+  for (const [composition, art] of Object.entries(studio.artwork)) {
+    for (const width of art.widths) {
+      for (const format of ["avif", "webp"]) {
+        const file = `public/media/studio/${composition}-${width}.${format}`;
+        const buffer = await readFile(file);
+        const metadata = await sharp(buffer).metadata();
+        assert.equal(metadata.width, width, `${file} width`);
+        assert.equal(metadata.height, Math.round(width * art.height / art.width), `${file} height`);
+        assert.ok(width <= art.width, `${file} exceeds its composition width`);
+        assert.ok(buffer.length < 220 * 1024, `${file} exceeds its byte budget`);
+      }
+    }
   }
 });
 
