@@ -5,8 +5,9 @@ export function AuditEvidence() {
     <section
       className={styles.auditEvidence}
       aria-labelledby="saved-evidence-title"
+      data-reveal-group
     >
-      <div>
+      <div data-reveal>
         <span className="eyebrow" style={{ color: "var(--accent-soft)" }}>
           From the actual saved report
         </span>
@@ -21,7 +22,7 @@ export function AuditEvidence() {
           state of the website.
         </p>
       </div>
-      <div className={styles.reportExcerpt}>
+      <div className={styles.reportExcerpt} data-reveal>
         <div>
           <span>OBSERVED PAGE</span>
           <code>python.org/about/</code>

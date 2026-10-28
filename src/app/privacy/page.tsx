@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 export default function PrivacyPage() {
   return (
-    <article className={styles.document}>
+    <article className={styles.document} data-arrival>
       <span className="eyebrow muted">Last updated / 28 October 2026</span>
       <h1>
         A little clarity

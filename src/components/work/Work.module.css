@@ -89,7 +89,7 @@
   transition: transform 0.6s;
 }
 .mediaLink:hover .media > img {
-  transform: scale(1.012);
+  transform: none;
 }
 .media.surge {
   background: #d8e2d8;
@@ -597,6 +597,21 @@
 .supporting h2 { font-size: clamp(40px, 4.5vw, 70px); }
 .mobileCapture { border-color: #a4bfb0; }
 .nextProject { border-top: 1px solid var(--rule); }
+.headingLine { display: block; clip-path: inset(-.12em -.02em); }
+.headingLine > span { display: block; }
+.media { transition: transform 350ms cubic-bezier(.2,.75,.2,1), border-color 250ms; }
+.mediaLink:focus-visible .media { border-color: var(--scarlet); }
+.projectTitle h3 { position: relative; }
+.projectTitle h3::after, .nextProject a::after { content: ''; position: absolute; inset: auto 0 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform 250ms; }
+.projectTitle:is(:hover, :focus-visible) h3::after, .nextProject a:is(:hover, :focus-visible)::after { transform: scaleX(1); transform-origin: left; }
+.nextProject a { position: relative; }
+.nextProject svg { transition: transform 250ms; }
+.decision, .nextProject { position: relative; border-top-color: transparent; }
+.decision::before, .nextProject::before { content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 1px; background: var(--rule); transform: scaleX(var(--rule-progress, 1)); transform-origin: left; }
+@media (min-width: 900px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  :global(html[data-motion="full"]) .mediaLink:is(:hover, :focus-visible) .media { transform: translateY(-4px); border-color: var(--scarlet); }
+  :global(html[data-motion="full"]) .nextProject a:is(:hover, :focus-visible) svg { transform: translate(4px, -4px); }
+}
 @media (max-width: 800px) { .sectionHeading { padding-top: 75px; padding-bottom: 65px; } }
 @media (max-width: 600px) {
  .sectionHeading { padding-top: 65px; padding-bottom: 55px; }

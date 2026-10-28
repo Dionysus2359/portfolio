@@ -34,6 +34,7 @@ export function ProjectMedia({
           sizes="(max-width: 700px) 100vw, 92vw"
           loading={priority ? "eager" : "lazy"}
           fetchPriority={priority ? "high" : undefined}
+          data-critical-image={priority ? "" : undefined}
         />
         <figcaption className={styles.mediaCaption}>
           {project.poster.kind === "capture"

@@ -166,12 +166,12 @@
   padding-top: 22px;
   flex: 1;
 }
-.auditFlow > div {
+.auditPanel > div {
   border-left: 1px solid #ff654650;
   padding-left: 15px;
   margin-bottom: 20px;
 }
-.auditFlow > div > span {
+.auditPanel > div > span {
   display: block;
   font-size: 8px;
   color: var(--accent-soft);
@@ -415,7 +415,7 @@
 .about { padding-top: 110px; padding-bottom: 110px; background: var(--ivory); color: var(--deep); --muted: #4b6558; --rule: #082a2535; --accent-soft: #a72b22; grid-template-columns: .85fr 1.15fr; gap: 8%; }
 .aboutLabel { gap: 40px; }
 .aboutPoster { position: relative; padding: 28px; min-height: 425px; background: var(--petrol); color: var(--ivory); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
-.aboutPoster::before { content: ''; position: absolute; width: 1px; height: 160%; right: 30%; top: -30%; background: var(--scarlet); box-shadow: 0 0 70px 14px #eb302b38; transform: rotate(26deg); }
+.aboutPoster::before { content: ''; position: absolute; width: 1px; height: 160%; right: 30%; top: -30%; background: var(--scarlet); box-shadow: 0 0 70px 14px #eb302b38; transform: rotate(26deg) scaleY(var(--seam-progress, 1)); }
 .aboutPoster > span { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; position: relative; }
 .aboutPoster p { font-family: Bodoni Moda, Georgia, serif; font-size: clamp(60px, 6.5vw, 115px); font-weight: 500; line-height: .9; letter-spacing: -.06em; color: #ff5149; position: relative; padding: 45px 0; }
 .aboutPoster > span:last-child { color: var(--sage); }
@@ -434,7 +434,7 @@
 .typeExperiment input { accent-color: #a12b23; }
 .auditExperiment { background: var(--petrol); color: var(--ivory); --muted: #b7c7bc; --rule: #f2edde35; --accent-soft: #a4bfb0; }
 .auditExperiment select { background: var(--deep); color: var(--ivory); }
-.auditFlow > div { border-left-color: var(--sage); }
+.auditPanel > div { border-left-color: var(--sage); }
 .auditFlow p, .auditFlow code { color: #cbd8ce; }
 .contact { position: relative; isolation: isolate; background: var(--petrol); color: var(--ivory); padding-top: 55px; padding-bottom: 45px; overflow: hidden; }
 .contact::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(112deg, transparent 60%, #a4bfb013 60.1%, transparent 77%), linear-gradient(112deg, transparent 77%, #eb302b55 77.2%, #eb302b00 85%), radial-gradient(ellipse at 90% 100%, #eb302b25, transparent 50%); }
@@ -468,3 +468,18 @@
 }
 
 .about > *, .experimentGrid > * { min-width: 0; }
+.aboutPoster p > span { display: block; }
+.auditFlow { display: grid; }
+.auditPanel { grid-area: 1 / 1; min-width: 0; visibility: hidden; pointer-events: none; }
+.auditPanelActive { visibility: visible; pointer-events: auto; }
+:global(html[data-motion="full"]) .auditPanelActive { animation: audit-change 220ms ease-out; }
+@keyframes audit-change { from { opacity: .4; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* Pull inner layers only, so the whole-section detector and link stay still. */
+.contactHeading { min-width: 0; }
+.contactHeading h2 { transform: translate3d(var(--contact-x, 0px), var(--contact-y, 0px), 0); transition: color 280ms; }
+.contactTitle > span { border: 0; }
+.contactTitle:hover > span { background: none; color: inherit; transform: none; }
+.contactArrow { display: grid; place-items: center; width: 100%; height: 100%; border: 1px solid #f2edde70; border-radius: 50%; transform: translate3d(var(--contact-arrow-x, 0px), var(--contact-arrow-y, 0px), 0); transition: background 280ms, color 280ms; }
+.contact[data-contact-active] h2, .contact:focus-within h2 { color: var(--ivory); }
+.contact[data-contact-active] .contactArrow, .contact:focus-within .contactArrow { background: var(--ivory); color: var(--deep); }

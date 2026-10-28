@@ -38,12 +38,11 @@ export default function Home() {
       <StudioHero />
       <section className={styles.work} id="work">
         <div className={styles.sectionHeading} data-reveal-group>
-          <div data-reveal>
-            <span className="eyebrow muted">Selected work / 01—03</span>
+          <div>
+            <span className="eyebrow muted" data-reveal>Selected work / 01—03</span>
             <h2>
-              A little character.
-              <br />
-              <span className="serif">A lot of intent.</span>
+              <span className={styles.headingLine}><span data-reveal data-reveal-line>A little character.</span></span>
+              <span className={styles.headingLine}><span className="serif" data-reveal data-reveal-line>A lot of intent.</span></span>
             </h2>
           </div>
           <p data-reveal>

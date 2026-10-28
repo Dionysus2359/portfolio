@@ -41,8 +41,8 @@
 .projectIndex { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: min(750px, 65%); }
 .projectIndex a { display: flex; align-items: flex-start; gap: 15px; padding: 0 28px; border-left: 1px solid #f2eddea6; min-height: 44px; }
 .projectIndex a:first-child { padding-left: 0; border-left: 0; }
-.number { font-size: 10px; line-height: 1; padding-top: 2px; }
-.indexName { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex: 1; border-top: 1px solid #f2eddea6; padding-top: 10px; text-transform: uppercase; font-size: 10px; letter-spacing: .18em; }
+.number { font-size: 11px; line-height: 1; padding-top: 2px; }
+.indexName { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex: 1; border-top: 1px solid #f2eddea6; padding-top: 10px; text-transform: uppercase; font-size: 12px; letter-spacing: .18em; }
 .indexName svg { width: 14px; height: 14px; opacity: 0; transform: translate(-4px, 4px); transition: .3s; }
 .projectIndex a:hover svg, .projectIndex a:focus-visible svg { opacity: 1; transform: none; }
 .scrollNote { font-size: 9px; letter-spacing: .13em; text-transform: uppercase; display: flex; gap: 24px; align-items: center; }
@@ -72,7 +72,7 @@
   .cta { margin-top: 22px; font-size: 9px; gap: 35px; min-height: 46px; padding: 10px 15px; background: #041b1840; }
   .projectIndex { width: 100%; grid-template-columns: 1fr; }
   .projectIndex a { padding: 12px 0; border: 0; border-top: 1px solid #f2eddea6; min-height: 45px; gap: 22px; }
-  .indexName { padding: 0; border: 0; font-size: 9px; }
+  .indexName { padding: 0; border: 0; font-size: 11px; }
   .indexName svg { opacity: 1; transform: none; }
   .scrollNote { display: none; }
 }

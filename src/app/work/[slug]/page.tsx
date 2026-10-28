@@ -48,14 +48,14 @@ export default async function ProjectPage({
         <Link href="/#work" className={styles.back}>
           ← Back to selected work
         </Link>
-        <p className="eyebrow" style={{ color: project.accent }}>
+        <p className="eyebrow" style={{ color: project.accent }} data-arrival>
           {project.number} / {project.category}
         </p>
-        <h1>
+        <h1 data-arrival>
           {project.title}
           <span style={{ color: project.accent }}>.</span>
         </h1>
-        <div className={styles.caseIntro}>
+        <div className={styles.caseIntro} data-arrival>
           <p>{project.summary}</p>
           {project.liveUrl && (
             <a
@@ -69,11 +69,11 @@ export default async function ProjectPage({
           )}
         </div>
       </section>
-      <div className={styles.caseVisual}>
+      <div className={styles.caseVisual} data-arrival>
         <ProjectMedia project={project} priority />
       </div>
       <section className={styles.caseDetails} data-reveal-group>
-        <aside className={styles.caseAside}>
+        <aside className={styles.caseAside} data-reveal>
           <div>
             <h2 className="eyebrow">My role</h2>
             <p>{project.role}</p>
@@ -103,7 +103,7 @@ export default async function ProjectPage({
           </h2>
           <p data-reveal>{project.problem}</p>
           {project.decisions.map((decision, index) => (
-            <div key={decision.title} className={styles.decision} data-reveal>
+            <div key={decision.title} className={styles.decision} data-reveal-group data-reveal data-rule-reveal>
               <span>0{index + 1} / THE DECISION</span>
               <h3>{decision.title}</h3>
               <p>{decision.body}</p>
@@ -152,8 +152,8 @@ export default async function ProjectPage({
       )}
       {project.slug === "adobe" && <AuditEvidence />}
       {project.mobilePoster && (
-        <section className={styles.supporting}>
-          <div>
+        <section className={styles.supporting} data-reveal-group>
+          <div data-reveal>
             <span className="eyebrow muted">Same world. Smaller screen.</span>
             <h2>
               A considered
@@ -175,7 +175,7 @@ export default async function ProjectPage({
               </a>
             )}
           </div>
-          <figure className={styles.mobileCapture}>
+          <figure className={styles.mobileCapture} data-reveal>
             <Image
               src={project.mobilePoster.src}
               alt={project.mobilePoster.alt}
@@ -193,17 +193,17 @@ export default async function ProjectPage({
           ))}
         </section>
       )}
-      <section className={styles.evidence}>
-        <h2 className="eyebrow">Context & evidence</h2>
-        <ul>
+      <section className={styles.evidence} data-reveal-group>
+        <h2 className="eyebrow" data-reveal>Context & evidence</h2>
+        <ul data-reveal>
           {project.evidenceNotes.map((note) => (
             <li key={note}>{note}</li>
           ))}
         </ul>
       </section>
-      <section className={styles.nextProject}>
-        <span className="eyebrow muted">Next project / {next.number}</span>
-        <Link href={`/work/${next.slug}/`}>
+      <section className={styles.nextProject} data-reveal-group data-rule-reveal>
+        <span className="eyebrow muted" data-reveal>Next project / {next.number}</span>
+        <Link href={`/work/${next.slug}/`} data-reveal>
           {next.shortTitle}
           <Arrow diagonal />
         </Link>

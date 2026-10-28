@@ -4,6 +4,8 @@ import { Footer } from "@/components/layout/Footer";
 import { profile } from "@/content/profile";
 import { MotionDirector } from "@/components/motion/MotionDirector";
 import { MotionPreferences } from "@/components/motion/MotionPreferences";
+import { ExperienceGate } from "@/components/loading/ExperienceGate";
+import { experienceBootstrap } from "@/lib/readiness";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -35,7 +37,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <link
           rel="preload"
@@ -44,15 +46,17 @@ export default function RootLayout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        <link rel="preload" href="/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </head>
       <body id="top">
-        <a href="#main" className="skip-link">
-          Skip to content
-        </a>
+        <script dangerouslySetInnerHTML={{ __html: experienceBootstrap() }} />
         <MotionPreferences>
-          <Header />
-          <main id="main">{children}</main>
-          <Footer />
+          <ExperienceGate>
+            <a href="#main" className="skip-link">Skip to content</a>
+            <Header />
+            <main id="main" tabIndex={-1}>{children}</main>
+            <Footer />
+          </ExperienceGate>
           <MotionDirector />
         </MotionPreferences>
       </body>

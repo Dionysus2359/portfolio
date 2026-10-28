@@ -3,17 +3,20 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useMotionPreferences } from "./MotionPreferences";
+import { useExperienceReady } from "@/components/loading/useExperienceReady";
 
 // Copy remains server-rendered. Motion is attached only after its library loads.
 export function MotionDirector() {
   const pathname = usePathname();
   const { ready, reduced } = useMotionPreferences();
-  const allowed = ready && !reduced;
+  const experienceReady = useExperienceReady();
+  const allowed = ready && !reduced && experienceReady;
 
   useEffect(() => {
     if (!allowed) return;
     let cancelled = false;
     let revert: (() => void) | undefined;
+    const attachedAt = performance.now();
 
     void Promise.all([import("gsap"), import("gsap/ScrollTrigger")])
       .then(([{ gsap }, { ScrollTrigger }]) => {
@@ -31,13 +34,29 @@ export function MotionDirector() {
             const desktop = Boolean(context.conditions.desktop);
             const cleanups: (() => void)[] = [];
 
+            // Inner-route arrivals stay short. A late library never hides content
+            // that someone has already started reading or using.
+            if (performance.now() - attachedAt < 350 && !location.hash && window.scrollY < 80 && window.__omExperience?.reason !== "restore") {
+              const arrivals = gsap.utils.toArray<HTMLElement>("[data-arrival]").filter(item => {
+                const rect = item.getBoundingClientRect();
+                return rect.height > 0 && rect.top < innerHeight && rect.bottom > 0 && !item.contains(document.activeElement);
+              });
+              const arrival = gsap.fromTo(arrivals, { y: 12, opacity: .55 }, {
+                y: 0, opacity: 1, duration: .3, stagger: .045, ease: "power2.out", clearProps: "transform,opacity",
+              });
+              const focusArrival = () => { arrival.progress(1); };
+              document.addEventListener("focusin", focusArrival, { once: true });
+              cleanups.push(() => document.removeEventListener("focusin", focusArrival));
+            }
+
             // Attach reveals only below the initial viewport; focus always completes them.
             for (const group of gsap.utils.toArray<HTMLElement>(
               "[data-reveal-group]",
             )) {
-              const items = Array.from(
-                group.querySelectorAll<HTMLElement>("[data-reveal]"),
-              ).filter(
+              const items = [
+                ...(group.matches("[data-reveal]") ? [group] : []),
+                ...Array.from(group.querySelectorAll<HTMLElement>("[data-reveal]")).filter(item => item.closest("[data-reveal-group]") === group),
+              ].filter(
                 (item) =>
                   item.getBoundingClientRect().height > 0 &&
                   item.getBoundingClientRect().top > window.innerHeight * 0.96,
@@ -45,12 +64,12 @@ export function MotionDirector() {
               if (!items.length) continue;
               const reveal = gsap.fromTo(
                 items,
-                { y: desktop ? 42 : 22, opacity: 0 },
+                { y: (_index, item: HTMLElement) => item.hasAttribute("data-reveal-line") ? item.offsetHeight * 1.1 : desktop ? 32 : 18, opacity: 0 },
                 {
                   y: 0,
                   opacity: 1,
-                  duration: 0.9,
-                  stagger: 0.1,
+                  duration: 0.7,
+                  stagger: 0.085,
                   ease: "power3.out",
                   clearProps: "opacity,transform",
                   scrollTrigger: {
@@ -73,6 +92,18 @@ export function MotionDirector() {
               );
             }
 
+            for (const surface of gsap.utils.toArray<HTMLElement>("[data-seam-reveal], [data-rule-reveal]")) {
+              if (surface.getBoundingClientRect().top <= innerHeight * .96 || !surface.getBoundingClientRect().height) continue;
+              const property = surface.hasAttribute("data-seam-reveal") ? "--seam-progress" : "--rule-progress";
+              const rule = gsap.fromTo(surface, { [property]: 0 }, {
+                [property]: 1, duration: .7, ease: "power3.out", clearProps: property,
+                scrollTrigger: { trigger: surface, start: "top 88%", once: true },
+              });
+              const show = () => { rule.progress(1); };
+              surface.addEventListener("focusin", show);
+              cleanups.push(() => surface.removeEventListener("focusin", show));
+            }
+
             for (const figure of gsap.utils.toArray<HTMLElement>(
               "[data-media-reveal]",
             )) {
@@ -88,7 +119,7 @@ export function MotionDirector() {
                 {
                   clipPath: "inset(0% 0% 0% 0%)",
                   opacity: 1,
-                  duration: 1.25,
+                  duration: 0.75,
                   ease: "power3.out",
                   clearProps: "clipPath,opacity",
                   scrollTrigger: {

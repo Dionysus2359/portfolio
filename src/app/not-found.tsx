@@ -3,7 +3,7 @@ import { Arrow } from "@/components/layout/Icons";
 import styles from "./Document.module.css";
 export default function NotFound() {
   return (
-    <section className={styles.error}>
+    <section className={styles.error} data-arrival>
       <span className="eyebrow" style={{ color: "var(--accent)" }}>
         404 / A small detour
       </span>

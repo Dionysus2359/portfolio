@@ -215,3 +215,7 @@
 .form label > span { color: var(--accent-soft); }
 .formAction > p { font-size: 12px; }
 .draft h2 { font-family: Bodoni Moda, Georgia, serif; font-size: 36px; font-weight: 400; }
+.form input, .form textarea, .form select { transition: border-color 200ms; }
+.form input:focus, .form textarea:focus, .form select:focus { border-bottom-color: var(--accent-soft); }
+:global(html[data-motion="full"]) .draft { animation: draft-ready 300ms ease-out; }
+@keyframes draft-ready { from { opacity: .55; transform: translateY(8px); } to { opacity: 1; transform: none; } }

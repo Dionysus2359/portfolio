@@ -1,23 +1,26 @@
 import Link from "next/link";
 import { profile } from "@/content/profile";
 import { Arrow } from "@/components/layout/Icons";
+import { ContactSectionMotion } from "./ContactSectionMotion";
 import styles from "./Sections.module.css";
 
 export function ContactSection() {
   return (
-    <section className={styles.contact} id="contact" data-reveal-group>
+    <section className={styles.contact} id="contact" data-reveal-group data-contact-motion>
       <div className={styles.contactTop} data-reveal>
         <span className="eyebrow">Have something in mind?</span>
         <span className="eyebrow">Let’s make it happen.</span>
       </div>
       <Link href="/contact/" className={styles.contactTitle}>
-        <h2 data-reveal>
-          Good things start
-          <br />
-          with a <span className="serif">conversation.</span>
-        </h2>
+        <div className={styles.contactHeading} data-reveal>
+          <h2>
+            Good things start
+            <br />
+            with a <span className="serif">conversation.</span>
+          </h2>
+        </div>
         <span>
-          <span data-magnetic>
+          <span className={styles.contactArrow}>
             <Arrow diagonal />
           </span>
         </span>
@@ -32,6 +35,7 @@ export function ContactSection() {
           {profile.email} <Arrow diagonal />
         </a>
       </div>
+      <ContactSectionMotion />
     </section>
   );
 }

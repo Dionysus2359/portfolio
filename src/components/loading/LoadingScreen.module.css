@@ -1,0 +1,35 @@
+.screen { display: none; position: fixed; inset: 0; z-index: 90; color: var(--ivory); --seam-position: 69%; --opening-exit: 500ms; }
+:global(html[data-experience="loading"]) .screen,
+:global(html[data-experience="exiting"]) .screen { display: block; }
+.panel { position: absolute; inset-block: 0; background: var(--deep); transition: transform var(--opening-exit) cubic-bezier(.76, 0, .24, 1); }
+.left { left: 0; width: var(--seam-position); }
+.right { right: 0; width: calc(100% - var(--seam-position) + 1px); }
+.identity { position: absolute; inset: 0; pointer-events: none; transition: opacity 180ms, transform 300ms; }
+.top, .bottom { position: absolute; left: var(--gutter); right: var(--gutter); display: flex; justify-content: space-between; gap: 24px; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; }
+.top { top: 38px; }
+.signature { position: absolute; left: 8%; top: 34%; font-family: Bodoni Moda, Georgia, serif; font-size: clamp(70px, 9vw, 160px); font-weight: 400; line-height: .95; letter-spacing: -.025em; }
+.signature > span { display: block; }
+.seam { position: absolute; top: 16%; bottom: 17%; left: var(--seam-position); width: 2px; background: var(--scarlet); box-shadow: 0 0 42px 9px #ff393144; transform-origin: center; animation: seam-arrive var(--opening-hold, 1100ms) ease-in-out both; }
+.bottom { bottom: 43px; }
+.activity { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 29px; height: 1px; background: var(--rule); overflow: hidden; }
+.activity::after { content: ''; display: block; width: 28%; height: 100%; background: var(--scarlet); animation: activity 1.4s ease-in-out infinite; }
+.skip { position: absolute; top: 78px; right: var(--gutter); display: flex; align-items: center; gap: 22px; min-height: 44px; border: 0; border-bottom: 1px solid var(--rule); padding: 8px 0; background: none; color: var(--muted); font-size: 11px; }
+.skip:hover, .skip:focus-visible { color: var(--ivory); }
+:global(html[data-experience="exiting"]) .left { transform: translateX(-101%); }
+:global(html[data-experience="exiting"]) .right { transform: translateX(101%); }
+:global(html[data-experience="exiting"]) .identity { opacity: 0; transform: translateY(-9px); }
+:global(html[data-experience="exiting"]) .skip { visibility: hidden; }
+:global(html[data-motion="reduced"]) .seam { animation: none; opacity: .45; }
+:global(html[data-motion="reduced"]) .activity::after { animation: none; transform: none; }
+@keyframes seam-arrive { from { transform: scaleY(.64); opacity: .6; } to { transform: scaleY(1); opacity: 1; } }
+@keyframes activity { from { transform: translateX(-100%); } to { transform: translateX(460%); } }
+@media (max-width: 700px) {
+  .screen { --seam-position: 80%; }
+  .signature { left: 8%; top: 36%; font-size: clamp(64px, 16vw, 100px); }
+  .top, .bottom { font-size: 9px; letter-spacing: .12em; }
+  .top { top: 28px; }
+  .skip { top: 63px; }
+  .bottom { bottom: 38px; }
+  .activity { bottom: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .seam, .activity::after { animation: none; } }

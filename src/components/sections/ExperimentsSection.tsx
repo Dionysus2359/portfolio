@@ -99,18 +99,22 @@ export function ExperimentsSection() {
             ))}
           </select>
           <div className={styles.auditFlow} aria-live="polite">
-            <div>
-              <span>01 / EVIDENCE</span>
-              <code>{auditExamples[sample].evidence}</code>
-            </div>
-            <div>
-              <span>02 / FINDING</span>
-              <p>{auditExamples[sample].finding}</p>
-            </div>
-            <div>
-              <span>03 / NEXT STEP</span>
-              <p>{auditExamples[sample].recommendation}</p>
-            </div>
+            {auditExamples.map((example, index) => (
+              <div key={example.label} className={`${styles.auditPanel} ${sample === index ? styles.auditPanelActive : ""}`} aria-hidden={sample !== index}>
+                <div>
+                  <span>01 / EVIDENCE</span>
+                  <code>{example.evidence}</code>
+                </div>
+                <div>
+                  <span>02 / FINDING</span>
+                  <p>{example.finding}</p>
+                </div>
+                <div>
+                  <span>03 / NEXT STEP</span>
+                  <p>{example.recommendation}</p>
+                </div>
+              </div>
+            ))}
           </div>
           <div className={styles.experimentFoot}>
             <h3>Show your working.</h3>

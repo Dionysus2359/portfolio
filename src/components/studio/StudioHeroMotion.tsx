@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useMotionPreferences } from "@/components/motion/MotionPreferences";
+import { EXPERIENCE_READY } from "@/lib/readiness";
 
 let entered = false;
 
@@ -47,7 +48,7 @@ export function StudioHeroMotion() {
     }
     const clearPointer = () => { inside = false; hero.style.setProperty("--light-alpha", "0"); targetX = x; targetY = y; requestFrame(); };
     const move = (event: PointerEvent) => {
-      if (!fine.matches || !visible || document.hidden) return;
+      if (!fine.matches || !visible || document.hidden || (window.__omExperience && window.__omExperience.phase !== "ready")) return;
       const rect = hero.getBoundingClientRect();
       targetX = event.clientX - rect.left; targetY = event.clientY - rect.top;
       if (!inside) { x = targetX; y = targetY; }
@@ -67,18 +68,29 @@ export function StudioHeroMotion() {
     window.addEventListener("resize", resize); window.addEventListener("scroll", clearPointer, { passive: true });
     window.addEventListener("blur", stop); fine.addEventListener("change", resize);
     document.addEventListener("visibilitychange", visibility);
-    // Late enhancement and return visits retain the already-visible composition.
-    if (!entered && performance.now() < 1800 && window.scrollY < 60 && !hero.contains(document.activeElement)) {
-      entered = true;
+    // Prepare the original entrance under the curtain, then play it once it leaves.
+    // Late enhancement, restores and return visits keep the visible composition.
+    const opening = window.__omExperience;
+    const canEnter = () => !location.hash && window.scrollY < 60 && !opening?.interacted &&
+      !["late", "restore", "route", "skip", "failsafe"].includes(opening?.reason || "") &&
+      !hero.contains(document.activeElement);
+    const fresh = opening ? opening.phase !== "ready" || performance.now() - opening.readyAt < 300 : performance.now() < 1800;
+    if (!entered && fresh && canEnter()) {
       void import("gsap").then(({ gsap }) => {
-        if (disposed || performance.now() > 2100 || hero.contains(document.activeElement)) return;
+        if (disposed || entered || !canEnter() || (opening?.phase === "ready" && performance.now() - opening.readyAt > 300)) return;
+        entered = true;
+        let timeline: gsap.core.Timeline;
         const context = gsap.context(() => {
-          gsap.fromTo("[data-studio-line]", { y: 24, opacity: .3 }, { y: 0, opacity: 1, duration: .85, stagger: .08, ease: "power3.out", clearProps: "transform,opacity" });
-          gsap.fromTo("[data-studio-detail]", { y: 12, opacity: .4 }, { y: 0, opacity: 1, duration: .7, delay: .15, stagger: .1, clearProps: "transform,opacity" });
+          timeline = gsap.timeline({ paused: true });
+          timeline.fromTo("[data-studio-line]", { y: 24, opacity: .3 }, { y: 0, opacity: 1, duration: .85, stagger: .08, ease: "power3.out", clearProps: "transform,opacity" }, 0);
+          timeline.fromTo("[data-studio-detail]", { y: 12, opacity: .4 }, { y: 0, opacity: 1, duration: .7, delay: .15, stagger: .1, clearProps: "transform,opacity" }, 0);
         }, hero);
         const reveal = () => context.revert();
+        const play = () => { if (canEnter()) timeline.play(); else reveal(); };
+        if (!opening || opening.phase === "ready") play();
+        else window.addEventListener(EXPERIENCE_READY, play, { once: true });
         hero.addEventListener("focusin", reveal, { once: true });
-        entranceCleanup = () => { hero.removeEventListener("focusin", reveal); context.revert(); };
+        entranceCleanup = () => { window.removeEventListener(EXPERIENCE_READY, play); hero.removeEventListener("focusin", reveal); context.revert(); };
       }).catch(() => { /* Server-rendered composition stays visible. */ });
     }
     return () => {

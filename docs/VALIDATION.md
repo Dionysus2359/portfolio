@@ -1,5 +1,7 @@
 # Verification record
 
+Latest revision: 28 October 2026, Scarlet seam and interaction refinements. See the dated entry at the end and [REFINEMENTS_2026-10-28.md](REFINEMENTS_2026-10-28.md). Browser screenshots/measurements below belong to earlier revisions.
+
 27 October 2026. This record describes the green Living poster build in the available local environment. Earlier O/gallery screenshots are historical assets, not evidence for this version.
 
 ## Automated checks
@@ -108,3 +110,14 @@ The browser/device limits above still apply. No dependency, font-file, scene-art
 - The homepage had matching content/scroll widths at 360, 390, 768, 1024, 1440 and 1920 viewports. The two cursor-reveal layers had matching spacing, kerning and transforms, and the pointer still activated the light. The draft card also reflowed without horizontal overflow at a 341px content width.
 - The production export, TypeScript and all six focused checks pass. The email check now also verifies that preview/copy fields and the nested Gmail URL match the encoded email-app link. `git diff --check` passes.
 - Evidence: `screenshots/headline-spacing-desktop.jpg`, `screenshots/headline-spacing-mobile.jpg` and `screenshots/contact-draft-subject-desktop.jpg`. The sharing card retains the existing clean render; its asset accounting above is unchanged.
+
+## 28 October 2026 Scarlet seam and motion refinements
+
+- Implemented the selected opening, actual responsive-image/font readiness, minimum/deadline/skip behavior, coordinated existing hero entrance, whole-section contact interaction, requested label-size increases and listed section/page motion refinements. Full behavior is recorded in [REFINEMENTS_2026-10-28.md](REFINEMENTS_2026-10-28.md).
+- The Next.js production export, strict TypeScript and all 16 Node checks pass. Run the suite with `node --test --test-isolation=none --test-reporter=spec tests/*.test.mjs` in this restricted environment. Ten new checks cover minimum/deadline policy, one-shot exit, controller failure recovery, pre-hydration skip/focus, restoration/hidden exits, reduced effects/storage failure/late bootstrap, image load/decode/error/cancellation/responsive replacement and bounded contact offsets. These are deterministic event/DOM doubles, not live browser measurements.
+- Source comparisons against `3530cc3` confirm unchanged hero markup/content and unchanged headline, introduction, CTA and scene CSS; only the requested project-label font rules differ in hero CSS. Contact draft helper/form logic and configured content are unchanged. Header wordmark sizing is scoped so the footer wordmark retains its original sizes.
+- Read-only HTTP checks on the local production preview returned 200 for home, all three case studies, contact, privacy, robots and sitemap; an unknown URL returned the designed 404. Fifteen referenced script/style/font/artwork responses were present and nonempty. The exported bootstrap precedes the loading surface and content, and the contact detector is on the whole section.
+- Build accounting: initial route scripts 186.5 KiB gzip; home styles 9.2 KiB gzip; both fonts 66.9 KiB; desktop/mobile hero AVIF 66.6/34.9 KiB. These are file accounting results, not network or performance measurements. There are no new dependencies, font files or image assets.
+- `git diff --check` passes. The pre-existing development imports in `next-env.d.ts` were restored after the build and excluded from the implementation checkpoint.
+
+Live visual review of this revision is pending. The browser tool rejected `http://127.0.0.1:3001/` under its URL policy; no workaround or alternative browser-control surface was used. No new screenshot, actual cursor/keyboard session, viewport sweep, network/cache throttling, browser-history session or performance score is claimed. Earlier screenshots and browser results above are historical and do not verify the new opening or interactions.

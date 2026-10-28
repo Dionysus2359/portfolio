@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div className={styles.page}>
-      <section className={styles.intro}>
+      <section className={styles.intro} data-arrival>
         <div>
           <span className="eyebrow muted">
             An idea is a good place to start.

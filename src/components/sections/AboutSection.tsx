@@ -15,9 +15,9 @@ export function AboutSection() {
           A little about the person
         </span>
         {!profile.portrait && (
-          <div className={styles.aboutPoster} aria-hidden="true">
+          <div className={styles.aboutPoster} aria-hidden="true" data-reveal-group data-seam-reveal>
             <span>Design × code × curiosity</span>
-            <p>Ideas.<br />Into<br />interfaces.</p>
+            <p><span data-reveal>Ideas.</span><span data-reveal>Into</span><span data-reveal>interfaces.</span></p>
             <span>Om Tiwari / India</span>
           </div>
         )}
@@ -50,7 +50,7 @@ export function AboutSection() {
         >
           More about me <Arrow diagonal />
         </a>
-        <div className={styles.approach}>
+        <div className={styles.approach} data-reveal-group>
           <div data-reveal>
             <span>01</span>
             <h3>Find the idea.</h3>
