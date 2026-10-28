@@ -17,3 +17,5 @@ The browser selects one base image through a responsive picture. The pointer-lig
 The originals are lossless masters outside `public/`. Only compressed delivery assets reach the website. The full approved mockup is a design reference; no interface text is baked into either master.
 
 To recreate the social preview, copy `social-card.html` temporarily into the local export, view it at 1200 × 630 with fonts loaded, capture that page, and convert the capture to `public/social-preview.png`. Remove the temporary route and rebuild. The current card was rendered in the local Chromium preview; its screenshot was exactly 1200 × 630.
+
+28 October 2026: the social card was rendered again with the site's shared Bodoni optical size of 16, making the fine strokes visible while retaining the composition, colors and original artwork. The font declarations include their variable weight ranges.

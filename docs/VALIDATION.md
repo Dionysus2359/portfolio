@@ -86,3 +86,15 @@ The previous revision emitted 478.5 KiB of JavaScript in total. Removing the 3D 
 - No slow-network lab run, rendering frame-time benchmark, hidden-tab timing benchmark or field-performance session was completed. The hero's settling loop is bounded and stops offscreen/hidden or when effects are reduced by code design.
 - Real email delivery remains intentionally unconfigured. The shipped contact flow prepares a draft.
 - Real photography, exact Adobe award evidence and a publishing origin remain owner inputs. Their current fallbacks are complete; no hosting or remote source upload was performed.
+
+## 28 October 2026 refinements
+
+- Kept the same Bodoni Moda font and weights, with a shared optical size of 16 and automatic optical sizing disabled. This restores fine stems and crossbars in the hero, supporting copy, section titles, playground and case studies. Hero copy uses font longhands so production CSS optimization cannot reset its optical settings through a shorthand.
+- Removed the decorative browser bar from shared project media, including its unused styles. Supplied screenshot pixels, aspect ratios, captions and green framing remain intact.
+- Retained the palette, layout dimensions, cursor reveal, parallax and motion controls. The social preview was rendered again at 1200 × 630 using the same typography setting; the temporary rendering page was removed.
+- Production export and TypeScript pass. All six existing focused checks and `git diff --check` pass.
+- Reviewed the production export in Codex in-app Chromium at widths 360, 390, 768, 1024, 1440 and 1920: no horizontal overflow or clipped headline. At 390px, ACM, Surge, Adobe, contact, privacy and the designed 404 all had matching content/scroll widths of 375px.
+- Computed styles confirmed `font-optical-sizing: none` and `"opsz" 16` for both cursor-reveal headline layers, supporting copy and serif headings on inner pages. The playground slider still changed weight from 600 to 601. The Reduce effects control still switched to reduced motion and automatic scrolling; Enable effects restored full motion.
+- Confirmed project figures begin directly with the screenshot, with no browser strip on the homepage or case studies. Updated evidence: `screenshots/refined-type-hero-desktop.jpg`, `screenshots/refined-type-hero-mobile.jpg`, `screenshots/refined-type-work-desktop.jpg` and `screenshots/refined-acm-media-desktop.jpg`.
+
+The browser/device limits above still apply. No dependency, font-file, scene-artwork, hosting or remote-source changes were made in this refinement. The asset byte counts above describe the original build; the updated social PNG is 1,080,113 bytes.

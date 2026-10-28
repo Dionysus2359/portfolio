@@ -116,7 +116,7 @@
   line-height: 1;
   padding: 74px 0 65px;
   text-align: center;
-  font-variation-settings: normal;
+  font-variation-settings: "opsz" var(--serif-optical-size);
 }
 .pulseType span {
   color: #dc472d;

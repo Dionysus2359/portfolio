@@ -26,19 +26,6 @@ export function ProjectMedia({
           } as CSSProperties
         }
       >
-        <div className={styles.browserBar} aria-hidden="true">
-          <span>
-            <i />
-            <i />
-            <i />
-          </span>
-          <span>
-            {project.liveUrl
-              ? new URL(project.liveUrl).host
-              : "audit architecture / process study"}
-          </span>
-          <span>↗</span>
-        </div>
         <Image
           src={project.poster.src}
           alt={project.poster.alt}
