@@ -57,6 +57,12 @@
   .projectIndex { width: 85%; }
   .scrollNote { display: none; }
 }
+/* A tall tablet follows the poster's content instead of stretching the floor. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .hero { min-height: 0; justify-content: flex-start; padding-top: clamp(144px, 12svh, 180px); gap: clamp(80px, 8svh, 112px); }
+  .headline > span:nth-child(2) { white-space: nowrap; }
+  .lastWord { display: inline; }
+}
 @media (max-width: 767px) {
   .hero { min-height: 100svh; padding-top: 130px; padding-bottom: 27px; gap: 170px; }
   .hero::after { background: linear-gradient(180deg, #041b1833 0%, #041b18b3 35%, #041b1880 48%, transparent 68%), linear-gradient(0deg, #041b18b3, transparent 30%); }

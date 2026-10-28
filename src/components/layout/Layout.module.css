@@ -26,3 +26,7 @@
 }
 @media (max-width: 380px) { .nav { gap: 12px; font-size: 10px; } }
 @media (max-width: 340px) { .nav { gap: 9px; } }
+/* Keep the homepage links legible over the metal in portrait tablet crops. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .header:has(+ main [data-studio-hero]) { background: linear-gradient(180deg, #041b18f2 0%, #041b18cc 60%, #041b1800 100%); }
+}

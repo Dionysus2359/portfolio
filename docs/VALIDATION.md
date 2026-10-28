@@ -1,6 +1,6 @@
 # Verification record
 
-Latest revision: 28 October 2026, Scarlet seam and interaction refinements. See the dated entry at the end and [REFINEMENTS_2026-10-28.md](REFINEMENTS_2026-10-28.md). Browser screenshots/measurements below belong to earlier revisions.
+Latest revision: 28 October 2026, portrait-tablet composition adjustment. See the dated entry at the end. The preceding Scarlet seam work is recorded in [REFINEMENTS_2026-10-28.md](REFINEMENTS_2026-10-28.md). Browser screenshots/measurements below belong to earlier revisions.
 
 27 October 2026. This record describes the green Living poster build in the available local environment. Earlier O/gallery screenshots are historical assets, not evidence for this version.
 
@@ -121,3 +121,12 @@ The browser/device limits above still apply. No dependency, font-file, scene-art
 - `git diff --check` passes. The pre-existing development imports in `next-env.d.ts` were restored after the build and excluded from the implementation checkpoint.
 
 Live visual review of this revision is pending. The browser tool rejected `http://127.0.0.1:3001/` under its URL policy; no workaround or alternative browser-control surface was used. No new screenshot, actual cursor/keyboard session, viewport sweep, network/cache throttling, browser-history session or performance score is claimed. Earlier screenshots and browser results above are historical and do not verify the new opening or interactions.
+
+## 28 October 2026 portrait-tablet follow-up
+
+- Added a portrait-only breakpoint from 768–1199 CSS px, including the supplied 1032 × 1376 iPad view. The existing phone, landscape and desktop rules are unchanged.
+- The homepage header receives a dark-green gradient fading to transparent, using the existing palette to improve link contrast over the bright metal. Solid inner-page headers are unaffected.
+- The tablet headline uses two lines with its existing font size, weight, optical size, spacing and color. This is the approved tablet-specific exception to the earlier fixed hero composition; phone and laptop headline layouts remain unchanged.
+- The portrait-tablet hero follows its content, with 144–180 px of top clearance and an 80–112 px gap above the project index, rather than pushing the index to the bottom of a full-height viewport. Artwork files, focal-point configuration, CTA, supporting copy and all animation code are unchanged.
+- The production export, strict TypeScript, all 16 existing checks and `git diff --check` pass. A source comparison confirms that both CSS files match their previous versions when the added portrait-tablet media blocks are removed. A breakpoint predicate check covers common portrait tablets and excludes phone and landscape/laptop examples; it is not a rendered viewport test.
+- Live visual verification remains pending under the existing browser URL-policy restriction. No new screenshot or physical iPad/Safari result is claimed. The pre-existing generated development imports in `next-env.d.ts` were preserved outside the checkpoint.

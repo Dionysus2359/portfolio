@@ -9,6 +9,7 @@
 - Fine-pointer light reveal through the scene and headline, bounded image parallax, short optional entrance, restrained hero exit and section/media motion in normal document flow.
 - Scarlet seam opening, real first-view image/font readiness, minimum hold, skip/deadline recovery and coordinated original hero entrance. Internal navigation avoids replaying the full opening.
 - Whole-section contact pull with existing ivory color feedback, slightly larger header/project labels and the selected Work/About/case-study/form motion refinements. The approved hero typography, artwork, CTA and colors remain unchanged.
+- Portrait-tablet adaptation: a two-line headline, content-led hero height, controlled project-index spacing and a fading green header backdrop. This later tablet-specific layout adjustment preserves the existing phone/laptop compositions, type treatments, artwork and animations.
 - Shared motion provider: OS reduced-motion preference, persistent `om-effects` choice, cross-tab updates and in-memory fallback when storage is blocked. Effects control remains available in the footer across routes.
 - Reliable repeated homepage section anchors and client navigation from inner routes.
 - Complete identity across work, About, playground, contact, three case studies, privacy and custom 404; updated local fonts, OT favicon and social preview.
