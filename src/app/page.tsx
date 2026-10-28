@@ -5,6 +5,7 @@ import { ExperimentsSection } from "@/components/sections/ExperimentsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { projects } from "@/content/projects";
 import { profile } from "@/content/profile";
+import { siteOrigin } from "@/lib/site-origin";
 import styles from "@/components/work/Work.module.css";
 
 export default function Home() {
@@ -13,17 +14,17 @@ export default function Home() {
     "@graph": [
       {
         "@type": "Person",
-        "@id": `${profile.origin}/#person`,
+        "@id": `${siteOrigin}/#person`,
         name: profile.name,
-        url: profile.origin,
+        url: siteOrigin,
         jobTitle: profile.descriptor,
         sameAs: [profile.github, profile.linkedin],
       },
       {
         "@type": "WebSite",
         name: "Om Tiwari",
-        url: profile.origin,
-        author: { "@id": `${profile.origin}/#person` },
+        url: siteOrigin,
+        author: { "@id": `${siteOrigin}/#person` },
       },
     ],
   };

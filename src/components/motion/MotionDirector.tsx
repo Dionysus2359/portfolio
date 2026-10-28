@@ -41,12 +41,14 @@ export function MotionDirector() {
                 const rect = item.getBoundingClientRect();
                 return rect.height > 0 && rect.top < innerHeight && rect.bottom > 0 && !item.contains(document.activeElement);
               });
-              const arrival = gsap.fromTo(arrivals, { y: 12, opacity: .55 }, {
-                y: 0, opacity: 1, duration: .3, stagger: .045, ease: "power2.out", clearProps: "transform,opacity",
-              });
-              const focusArrival = () => { arrival.progress(1); };
-              document.addEventListener("focusin", focusArrival, { once: true });
-              cleanups.push(() => document.removeEventListener("focusin", focusArrival));
+              if (arrivals.length) {
+                const arrival = gsap.fromTo(arrivals, { y: 12, opacity: .55 }, {
+                  y: 0, opacity: 1, duration: .3, stagger: .045, ease: "power2.out", clearProps: "transform,opacity",
+                });
+                const focusArrival = () => { arrival.progress(1); };
+                document.addEventListener("focusin", focusArrival, { once: true });
+                cleanups.push(() => document.removeEventListener("focusin", focusArrival));
+              }
             }
 
             // Attach reveals only below the initial viewport; focus always completes them.
@@ -115,13 +117,12 @@ export function MotionDirector() {
                 continue;
               const tween = gsap.fromTo(
                 figure,
-                { clipPath: "inset(8% 0% 8% 0%)", opacity: 0.35 },
+                { clipPath: "inset(8% 0% 8% 0%)" },
                 {
                   clipPath: "inset(0% 0% 0% 0%)",
-                  opacity: 1,
                   duration: 0.75,
                   ease: "power3.out",
-                  clearProps: "clipPath,opacity",
+                  clearProps: "clipPath",
                   scrollTrigger: {
                     trigger: figure,
                     start: "top 90%",
@@ -129,8 +130,16 @@ export function MotionDirector() {
                   },
                 },
               );
+              // Fade only the artwork: captions keep their intended contrast
+              // even while a below-the-fold reveal is waiting to run.
+              const image = figure.querySelector("img");
+              const fade = image ? gsap.fromTo(image, { opacity: .35 }, {
+                opacity: 1, duration: .75, ease: "power3.out", clearProps: "opacity",
+                scrollTrigger: { trigger: figure, start: "top 90%", once: true },
+              }) : undefined;
               const reveal = () => {
                 tween.progress(1);
+                fade?.progress(1);
               };
               const focusTarget = figure.closest("a") || figure;
               focusTarget.addEventListener("focusin", reveal);

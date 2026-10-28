@@ -6,7 +6,6 @@ export const profile = {
   email: "omtiwari2359@gmail.com",
   github: "https://github.com/Dionysus2359",
   linkedin: "https://www.linkedin.com/in/om-tiwari-240817247",
-  origin: (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3001").replace(/\/+$/, ""),
   portrait: null as EditorialPhoto | null,
   heroPortrait: false,
 };

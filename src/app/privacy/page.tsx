@@ -10,15 +10,30 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <article className={styles.document} data-arrival>
-      <span className="eyebrow muted">Last updated / 28 October 2026</span>
+      <span className="eyebrow muted">Last updated / 29 October 2026</span>
       <h1>
         A little clarity
         <br />
         <span className="serif">on privacy.</span>
       </h1>
       <p>
-        This is Om Tiwari’s personal portfolio. The site does not use analytics,
-        advertising trackers or a visitor account system.
+        This is Om Tiwari’s personal portfolio. It uses Vercel Web Analytics and
+        Speed Insights on the production site to understand visits and loading
+        performance. It has no advertising trackers or visitor accounts.
+      </p>
+      <h2>Visits and performance</h2>
+      <p>
+        Vercel processes page locations, referrers, browser and device information,
+        approximate location, and performance measurements for these reports.
+        These tools do not use analytics cookies. This site removes query strings
+        and URL fragments from the page URLs it reports, and does not send contact
+        form contents or track them as custom events. Monitoring is disabled in
+        local and preview builds.
+      </p>
+      <p>
+        Read Vercel’s <a href="https://vercel.com/docs/analytics/privacy-policy">Web
+        Analytics privacy information</a> and <a href="https://vercel.com/docs/speed-insights/privacy-policy">Speed
+        Insights privacy information</a> for details of their processing.
       </p>
       <h2>Contacting me</h2>
       <p>

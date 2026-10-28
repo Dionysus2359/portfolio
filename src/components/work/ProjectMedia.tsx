@@ -18,7 +18,7 @@ export function ProjectMedia({
       data-media-drift={motion ? "" : undefined}
     >
       <figure
-        className={`${styles.media} ${styles[project.slug]}`}
+        className={[styles.media, styles[project.slug]].filter(Boolean).join(" ")}
         data-media-reveal={motion ? "" : undefined}
         style={
           {

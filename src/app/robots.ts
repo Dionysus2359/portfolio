@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
-import { profile } from "@/content/profile";
+import { siteOrigin } from "@/lib/site-origin";
 export const dynamic = "force-static";
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: "*", allow: "/" },
-    sitemap: `${profile.origin}/sitemap.xml`,
+    sitemap: `${siteOrigin}/sitemap.xml`,
   };
 }

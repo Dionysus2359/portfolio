@@ -4,7 +4,7 @@ import { access, readFile } from "node:fs/promises";
 import { createEmailDraft } from "../src/lib/contact.ts";
 import { projects } from "../src/content/projects.ts";
 import sharp from "sharp";
-import { profile } from "../src/content/profile.ts";
+import { siteOrigin } from "../src/lib/site-origin.ts";
 import { parseMotionChoice, shouldReduceMotion } from "../src/lib/motion.ts";
 
 test("email drafts encode visitor text without creating extra mail headers", () => {
@@ -56,7 +56,7 @@ test("every project has real local media and a complete independent case-study r
     }
     assert.ok(
       html.includes(
-        `canonical\" href=\"${profile.origin}/work/${project.slug}/`,
+        `canonical\" href=\"${siteOrigin}/work/${project.slug}/`,
       ),
     );
   }

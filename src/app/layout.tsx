@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { profile } from "@/content/profile";
+import { siteOrigin } from "@/lib/site-origin";
 import { MotionDirector } from "@/components/motion/MotionDirector";
 import { MotionPreferences } from "@/components/motion/MotionPreferences";
 import { ExperienceGate } from "@/components/loading/ExperienceGate";
 import { experienceBootstrap } from "@/lib/readiness";
+import { VercelMonitoring } from "@/components/monitoring/VercelMonitoring";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(profile.origin),
+  metadataBase: new URL(siteOrigin),
   title: {
-    default: "Om Tiwari — Made to feel different.",
+    default: "Om Tiwari · Made to feel different.",
     template: "%s · Om Tiwari",
   },
   description:
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Om Tiwari",
-    title: "Made to feel different. — Om Tiwari",
+    title: "Made to feel different. · Om Tiwari",
     images: [
       {
         url: "/social-preview.png",
@@ -59,6 +60,7 @@ export default function RootLayout({
           </ExperienceGate>
           <MotionDirector />
         </MotionPreferences>
+        {process.env.VERCEL_ENV === "production" && <VercelMonitoring />}
       </body>
     </html>
   );

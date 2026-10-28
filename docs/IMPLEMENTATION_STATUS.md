@@ -1,6 +1,6 @@
 # Implementation status
 
-28 October 2026 — the approved green Living poster redesign and selected Scarlet seam refinements are implemented on `green-living-poster`. The refinement pass has automated and HTTP verification; live visual review of this revision remains pending because the browser tool rejected the local preview URL.
+29 October 2026 — the green Living poster and Scarlet seam refinements are merged into `main`. The owner deployed the portfolio on Vercel. This follow-up adds Vercel monitoring, canonical-origin recovery and fixes identified in the supplied Lighthouse report. Automated and read-only HTTP verification are recorded below; live browser review remains unavailable under the existing tool restriction.
 
 ## Complete
 
@@ -18,12 +18,15 @@
 - Keyboard-operable variable-font and evidence examples; contact draft preparation with visible recipient/subject, Gmail and email-app links, matching copyable text and a direct email fallback.
 - Retired the O, long pinned gallery/handoff, hiding rules, scene assets and all Three.js/R3F dependencies. No WebGL or perpetual renderer is needed.
 - Asset/bundle scripts, focused tests, source notes, screenshots and validation record updated.
+- Vercel Web Analytics and Speed Insights integration for production builds only, with page URL query/fragment redaction and an updated privacy page. Dashboard activation and post-deployment collection still need owner-side verification.
+- Validated canonical origin with automatic Vercel production-domain fallback, shared by metadata, structured data, robots and the sitemap. Invalid non-Vercel configuration fails clearly.
+- Empty GSAP arrival targets are skipped. Media reveal opacity affects only images, preserving caption contrast. Screenshot links include their visible captions in their accessible names.
 
 ## Delivery
 
-The motion/media version and approved plan are preserved at checkpoint `2ce1fb9` on `motion-and-project-media`. The current portfolio and refinements are on `green-living-poster`. The older baseline `c5ae0b8` remains on `main` and `origin/main`.
+The motion/media version and approved plan are preserved at checkpoint `2ce1fb9` on `motion-and-project-media`. `green-living-poster` preserves the final redesign at `a288345`, which was fast-forwarded into `main` and pushed. The monitoring/report fixes and browser/share title without an em dash are prepared for redeployment from `main` after the final passing production checks.
 
-The static export is generated in `out/`; `npm run preview` serves it on port 3001. Local preview servers are stopped at handover. No hosting deployment or Sites publication has run. The old Sites configuration is historical, and the review default origin is `http://localhost:3001`. Set `NEXT_PUBLIC_SITE_URL` to the chosen domain before a publishing build.
+The static export is generated in `out/`; `npm run preview` serves it on port 3001. No preview server was started for this follow-up. The old Sites configuration is historical. The owner-deployed Vercel URL is `https://portfolio-murex-omega-accqha17em.vercel.app/`. Read-only HTTP checks confirmed the existing live build still has placeholder canonical/social/sitemap URLs; the local fix uses `VERCEL_PROJECT_PRODUCTION_URL` when the explicit setting is missing or invalid. An explicit real `NEXT_PUBLIC_SITE_URL` takes precedence. Environment changes require a new deployment.
 
 Generated Next.js declarations are excluded from version control. The typecheck command regenerates them, so switching between dev and production builds no longer creates a tracked `next-env.d.ts` diff.
 

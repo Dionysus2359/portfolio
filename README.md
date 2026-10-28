@@ -32,13 +32,14 @@ Build before running the export checks. Artwork variants can be reproduced with 
 
 ## Repository branches
 
-- `green-living-poster`: the current portfolio and refinements.
+- `main`: the final portfolio, including the merged green redesign and refinements.
+- `green-living-poster`: the preserved green redesign branch.
 - `motion-and-project-media`: the preserved version before the green redesign.
-- `main`: the original repository baseline.
 
 ## Content and implementation
 
-- `src/content/profile.ts`: public identity, links, configured origin and optional portrait.
+- `src/content/profile.ts`: public identity, links and optional portrait.
+- `src/lib/site-origin.ts`: validated canonical origin for metadata and static routes.
 - `src/content/projects.ts`: roles, actual screenshots, case-study copy, evidence and optional event photography.
 - `src/content/studio.ts`: hero copy, artwork variants and crop positions.
 - `src/components/studio/`: server-rendered composition and small client motion island.
@@ -50,6 +51,14 @@ The device's reduced-motion preference takes precedence over the saved `om-effec
 
 ## Publishing
 
-Choose the production domain and set `NEXT_PUBLIC_SITE_URL` before the publishing build. The review default is `http://localhost:3001`; it is deliberately not a chosen production origin. The earlier Sites identity in `.openai/hosting.json` is historical and does not represent a live deployment. Hosting deployment is configured separately from Git pushes.
+On Vercel, leave `NEXT_PUBLIC_SITE_URL` empty to use its automatic `VERCEL_PROJECT_PRODUCTION_URL`, or set it to your preferred real origin, such as `https://your-real-domain.com`. Enter only the URL in the dashboard's Value field: no variable name, Markdown link or path. A missing, placeholder or invalid explicit value falls back to Vercel's production domain. An invalid value without that fallback fails the build with a useful error. The local default remains `http://localhost:3001`.
+
+Canonical tags, social image URLs, structured data, robots and the sitemap are generated during the build. Changing an environment variable requires a new deployment. The earlier Sites identity in `.openai/hosting.json` is historical; this portfolio is now deployed by its owner on Vercel.
+
+## Vercel monitoring
+
+`@vercel/analytics` and `@vercel/speed-insights` mount once in the root layout only when `VERCEL_ENV=production`. Local and Vercel preview builds do not collect data. Both integrations redact page query strings and fragments, and no custom or contact-form events are sent. The privacy page describes the reports.
+
+Enable Web Analytics in the Vercel project dashboard, then deploy the updated code and visit the production site. Speed Insights starts collecting after deployment with its package included. Use the basic tiers; no Plus upgrade is needed. Data collection still needs confirmation in the owner's dashboard after deployment. Current Hobby limits and the precise reports available are documented by [Vercel Web Analytics](https://vercel.com/docs/analytics/limits-and-pricing) and [Speed Insights](https://vercel.com/docs/speed-insights/limits-and-pricing).
 
 See `docs/IMPLEMENTATION_STATUS.md`, `docs/ASSETS.md`, `docs/VALIDATION.md` and `docs/CREDITS.md` for completed work, verification and remaining owner inputs.

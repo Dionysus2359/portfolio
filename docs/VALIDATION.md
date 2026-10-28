@@ -1,6 +1,6 @@
 # Verification record
 
-Latest revision: 28 October 2026, portrait-tablet composition adjustment. See the dated entry at the end. The preceding Scarlet seam work is recorded in [REFINEMENTS_2026-10-28.md](REFINEMENTS_2026-10-28.md). Browser screenshots/measurements below belong to earlier revisions.
+Latest revision: 29 October 2026, Vercel monitoring and production-report fixes. See [PRODUCTION_REVIEW_2026-10-29.md](PRODUCTION_REVIEW_2026-10-29.md) and the dated entry at the end. Browser screenshots/measurements below belong to earlier revisions.
 
 27 October 2026. This record describes the green Living poster build in the available local environment. Earlier O/gallery screenshots are historical assets, not evidence for this version.
 
@@ -137,3 +137,19 @@ Live visual review of this revision is pending. The browser tool rejected `http:
 - Stopped tracking `next-env.d.ts` and added it to `.gitignore`, following the installed Next.js TypeScript guide. The generated file remains on disk and in the TypeScript include list.
 - `npm run typecheck` now runs `next typegen` before `tsc --noEmit`, so declarations are generated automatically after a fresh checkout. README check instructions include both test files.
 - The updated typecheck command, production static export, all 16 existing tests and staged/unstaged whitespace checks pass. Running the Next.js generators no longer creates a tracked environment-declaration diff. No application behavior or dependency versions changed in this cleanup.
+
+## 29 October 2026 production-report follow-up
+
+- Parsed the user-supplied Lighthouse 13.4.1 HTML report from 29 October 2026 at 01:22 IST: desktop Performance 99, Accessibility 96, Best Practices 100, SEO 100, Agentic Browsing 100. FCP 0.3 s, LCP 0.7 s, TBT 0 ms, CLS 0.001. These are the supplied report's results, not a rerun of the changed code or a mobile result.
+- Read-only public HTTP checks returned 200 for home, robots and sitemap, and confirmed the placeholder domain in the existing live metadata. Both console-warning CSS files are valid route stylesheets: contact and the shared privacy/not-found document. Their speculative preloads can remain unused until navigation.
+- Added Vercel Web Analytics 2.0.1 and Speed Insights 2.0.0 following the installed Next.js analytics/static export/environment/metadata guides and official Vercel integration documentation. Installation reports zero vulnerabilities. Monitoring mounts only for `VERCEL_ENV=production`; no dashboard setting or paid tier was changed.
+- Production simulation with `NEXT_PUBLIC_SITE_URL=https://your-project.vercel.app`, `VERCEL_PROJECT_PRODUCTION_URL=portfolio-murex-omega-accqha17em.vercel.app`, and `VERCEL_ENV=production` passes strict TypeScript, the complete 11-page export, all 21 tests and whitespace checks. Export checks confirm consistent real-domain canonical, social, structured-data, robots and sitemap URLs.
+- Five new tests cover origin selection/invalid settings, URL redaction, exported metadata consistency, and the actual MotionDirector setup with DOM/GSAP doubles. The latter verifies no empty-target tween is created and opacity is applied to the image rather than the caption's figure.
+- Screenshot links retain their visible caption text in the accessible name instead of replacing it with an unrelated aria-label. Caption color values, artwork, typography and hero behavior remain unchanged.
+- No browser automation or fresh Lighthouse run was performed under the existing browser policy restriction. The corrected live Lighthouse score, Vercel dashboard event ingestion, mobile lab performance and physical-device results remain unverified. No hosting deployment was run by the agent for this follow-up.
+
+## 29 October 2026 final delivery checks
+
+- Rebuilt the production export after replacing the browser/share title's em dash with the existing middle-dot separator. The homepage title is `Om Tiwari · Made to feel different.`.
+- Strict TypeScript, the complete 11-page export, all 21 tests and whitespace checks pass with the Vercel production-domain fallback and monitoring enabled for the build.
+- GitHub `main` was refreshed before delivery and had no divergent commits. The monitoring, metadata, accessibility and title changes are prepared together for commit and push; no Vercel dashboard setting or paid tier was changed.

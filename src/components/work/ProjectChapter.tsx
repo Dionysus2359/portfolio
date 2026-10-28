@@ -33,8 +33,8 @@ export function ProjectChapter({ project }: { project: PortfolioProject }) {
       <Link
         href={`/work/${project.slug}/`}
         className={styles.mediaLink}
-        aria-label={`Explore the ${project.title} case study`}
       >
+        <span className="sr-only">Explore the {project.title} case study. </span>
         <ProjectMedia project={project} />
       </Link>
       <div className={styles.chapterBottom} data-reveal-group>
