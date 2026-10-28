@@ -1,6 +1,7 @@
 plans_docs/
 node_modules/
 .next/
+next-env.d.ts
 out/
 .sites-runtime/
 .env*

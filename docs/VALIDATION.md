@@ -130,3 +130,10 @@ Live visual review of this revision is pending. The browser tool rejected `http:
 - The portrait-tablet hero follows its content, with 144–180 px of top clearance and an 80–112 px gap above the project index, rather than pushing the index to the bottom of a full-height viewport. Artwork files, focal-point configuration, CTA, supporting copy and all animation code are unchanged.
 - The production export, strict TypeScript, all 16 existing checks and `git diff --check` pass. A source comparison confirms that both CSS files match their previous versions when the added portrait-tablet media blocks are removed. A breakpoint predicate check covers common portrait tablets and excludes phone and landscape/laptop examples; it is not a rendered viewport test.
 - Live visual verification remains pending under the existing browser URL-policy restriction. No new screenshot or physical iPad/Safari result is claimed. The pre-existing generated development imports in `next-env.d.ts` were preserved outside the checkpoint.
+
+## 28 October 2026 repository maintenance
+
+- Renamed the two working/checkpoint branches to `green-living-poster` and `motion-and-project-media`, preserving their commit history. Repository documentation uses the current names.
+- Stopped tracking `next-env.d.ts` and added it to `.gitignore`, following the installed Next.js TypeScript guide. The generated file remains on disk and in the TypeScript include list.
+- `npm run typecheck` now runs `next typegen` before `tsc --noEmit`, so declarations are generated automatically after a fresh checkout. README check instructions include both test files.
+- The updated typecheck command, production static export, all 16 existing tests and staged/unstaged whitespace checks pass. Running the Next.js generators no longer creates a tracked environment-declaration diff. No application behavior or dependency versions changed in this cleanup.

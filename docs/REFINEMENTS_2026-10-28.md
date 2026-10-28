@@ -1,6 +1,6 @@
 # Scarlet seam and interaction refinements
 
-Implemented locally on 28 October 2026, against `3530cc3` on `codex/green-living-poster`. This follows the selected refinement plan in `plans_docs/Portfolio_Refinements_Implementation_Plan_2026-10-28.md`. No hosting publication or remote source upload is part of this pass.
+Implemented locally on 28 October 2026, against `3530cc3` on `green-living-poster`. This follows the selected refinement plan in `plans_docs/Portfolio_Refinements_Implementation_Plan_2026-10-28.md`. No hosting publication or remote source upload was part of that implementation pass.
 
 ## Opening
 

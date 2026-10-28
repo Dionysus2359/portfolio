@@ -72,13 +72,13 @@ This planning request does not start application implementation, change the host
 
 ## 4. Preserve the current work before implementation
 
-The existing baseline is pushed as `c5ae0b8f335177728f9dc6e1a2a78d87b87874e3` on `origin/main`. The subsequent animation and supplied-media changes are still local on `codex/motion-and-project-media`.
+The existing baseline is pushed as `c5ae0b8f335177728f9dc6e1a2a78d87b87874e3` on `origin/main`. At planning time, the subsequent animation and supplied-media changes were local on the branch now named `motion-and-project-media`.
 
 Before changing the application:
 
 1. Inspect the current diff for any newer owner changes.
 2. Save the existing working version as a local Git checkpoint, including the supplied screenshots and motion work.
-3. Create `codex/green-living-poster` from that checkpoint.
+3. Create `green-living-poster` from that checkpoint.
 4. Preserve the current project content, media, contact behaviour and photography data.
 
 Do not reset the checkout or assume the remote baseline contains the later work. No remote push is part of this planning step.

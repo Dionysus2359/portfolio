@@ -1,6 +1,6 @@
 # Implementation status
 
-28 October 2026 — the approved green Living poster redesign and selected Scarlet seam refinements are implemented locally on `codex/green-living-poster`. The refinement pass has automated and HTTP verification; live visual review of this revision remains pending because the browser tool rejected the local preview URL.
+28 October 2026 — the approved green Living poster redesign and selected Scarlet seam refinements are implemented on `green-living-poster`. The refinement pass has automated and HTTP verification; live visual review of this revision remains pending because the browser tool rejected the local preview URL.
 
 ## Complete
 
@@ -21,9 +21,11 @@
 
 ## Delivery
 
-The existing motion/media version and approved plan were saved as local checkpoint `2ce1fb9` on `codex/motion-and-project-media` before the redesign. The older baseline `c5ae0b8` remains on `origin/main`.
+The motion/media version and approved plan are preserved at checkpoint `2ce1fb9` on `motion-and-project-media`. The current portfolio and refinements are on `green-living-poster`. The older baseline `c5ae0b8` remains on `main` and `origin/main`.
 
-The static export is generated in `out/`; `npm run preview` serves it on port 3001. Local preview servers are stopped at handover. No hosting deployment or source upload has run. The old Sites configuration is historical, and the review default origin is `http://localhost:3001`. Set `NEXT_PUBLIC_SITE_URL` to the chosen domain before a publishing build.
+The static export is generated in `out/`; `npm run preview` serves it on port 3001. Local preview servers are stopped at handover. No hosting deployment or Sites publication has run. The old Sites configuration is historical, and the review default origin is `http://localhost:3001`. Set `NEXT_PUBLIC_SITE_URL` to the chosen domain before a publishing build.
+
+Generated Next.js declarations are excluded from version control. The typecheck command regenerates them, so switching between dev and production builds no longer creates a tracked `next-env.d.ts` diff.
 
 ## Remaining owner inputs and environment limits
 
